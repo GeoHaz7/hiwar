@@ -24,7 +24,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.vendor.create');
     }
 
     /**
@@ -35,7 +35,6 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**

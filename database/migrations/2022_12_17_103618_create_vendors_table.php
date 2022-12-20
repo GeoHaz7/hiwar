@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('address');
             $table->integer('phone');
             $table->string('profile_image')->nullable();
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

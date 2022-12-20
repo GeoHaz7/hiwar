@@ -38,6 +38,13 @@
         opacity: 0;
     }
 }
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     font-size: 0.9rem;
 }
@@ -497,4 +504,14 @@ body {
 
 .chiller-theme .sidebar-footer > a:last-child {
     border-right: none;
+}
+
+.centerY {
+    position: relative;
+    top: 50%;
+    transform: translateY(-65%);
+}
+
+.mainForm {
+    width: 130vh;
 }

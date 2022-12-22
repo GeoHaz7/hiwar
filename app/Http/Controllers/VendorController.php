@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vendor;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class VendorController extends Controller
 {
@@ -14,7 +15,10 @@ class VendorController extends Controller
      */
     public function index()
     {
-        //
+        $users = Vendor::select('*');
+
+        return DataTables::eloquent($users)
+            ->make(true);
     }
 
     /**
@@ -24,7 +28,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        return view('pages.vendor.create');
+        return view('pages.vendors.createVendor');
     }
 
     /**
@@ -45,7 +49,7 @@ class VendorController extends Controller
      */
     public function show(Vendor $vendor)
     {
-        //
+        return view('pages.vendors.listVendors');
     }
 
     /**

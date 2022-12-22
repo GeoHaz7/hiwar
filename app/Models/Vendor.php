@@ -15,6 +15,7 @@ class Vendor extends Model
         'status',
         'address',
         'phone',
+        'user_id',
     ];
 
 

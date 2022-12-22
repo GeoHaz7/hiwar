@@ -22,5 +22,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/vendors/data', [App\Http\Controllers\VendorController::class, 'index'])->name('vendor.data');
+Route::get('/vendors', [App\Http\Controllers\VendorController::class, 'show'])->name('vendor.list');
 
 Route::get('/vendor/create', [App\Http\Controllers\VendorController::class, 'create'])->name('vendor.create');

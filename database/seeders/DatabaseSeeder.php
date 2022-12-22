@@ -30,20 +30,22 @@ class DatabaseSeeder extends Seeder
             'type' => '0',
         ]);
 
-        User::create([
-            'nickname' => 'Oriana_Element',
-            'email' => 'oriana@element.com',
-            'password' => '$2y$10$avAiACLwV4KgPTpnJsdeyO3K6u5dzMArXOyNA5WUBTC3yslfNXAn2',
-            'type' => '2',
-        ]);
+        \App\Models\Vendor::factory(4)->create();
 
-        Vendor::create([
-            'full_name' => 'Oriana Sabat',
-            'bio' =>  'Lorem Ipsum -_-',
-            'address' => 'Nativity Street',
-            'phone' => '0592341594',
-            'status' => 1,
-            'user_id' => User::where('nickname', 'Oriana_Element')->first()->user_id
-        ]);
+        // User::create([
+        //     'nickname' => 'Oriana_Element',
+        //     'email' => 'oriana@element.com',
+        //     'password' => '$2y$10$avAiACLwV4KgPTpnJsdeyO3K6u5dzMArXOyNA5WUBTC3yslfNXAn2',
+        //     'type' => '2',
+        // ]);
+
+        // Vendor::create([
+        //     'full_name' => 'Oriana Sabat',
+        //     'bio' =>  'Lorem Ipsum -_-',
+        //     'address' => 'Nativity Street',
+        //     'phone' => '0592341594',
+        //     'status' => 1,
+        //     'user_id' => User::where('nickname', 'Oriana_Element')->first()->user_id
+        // ]);
     }
 }

@@ -515,3 +515,12 @@ body {
 .mainForm {
     width: 130vh;
 }
+
+.listVendorProfile {
+    width: 80px;
+    height: 80px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 50%;
+}

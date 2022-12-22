@@ -16,6 +16,7 @@ class Vendor extends Model
         'address',
         'phone',
         'user_id',
+        'profile_image'
     ];
 
 

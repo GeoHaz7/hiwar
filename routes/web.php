@@ -26,3 +26,5 @@ Route::get('/vendors/data', [App\Http\Controllers\VendorController::class, 'inde
 Route::get('/vendors', [App\Http\Controllers\VendorController::class, 'show'])->name('vendor.list');
 
 Route::get('/vendor/create', [App\Http\Controllers\VendorController::class, 'create'])->name('vendor.create');
+Route::post('/vendor/store', [App\Http\Controllers\VendorController::class, 'store'])->name('vendor.store');
+Route::get('/vendor/edit/{id}', [App\Http\Controllers\VendorController::class, 'update'])->name('vendor.update');

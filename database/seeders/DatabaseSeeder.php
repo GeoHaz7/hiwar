@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         //2 = vendor
 
         User::create([
-            'nickname' => 'George Hazboun',
+            'username' => 'George Hazboun',
             'email' => 'georgehazboun1997@gmail.com',
             'password' => '$2y$10$avAiACLwV4KgPTpnJsdeyO3K6u5dzMArXOyNA5WUBTC3yslfNXAn2',
             'type' => '0',

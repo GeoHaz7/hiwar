@@ -13,7 +13,7 @@
                     <th>Address</th>
                     <th>Phone</th>
                     <th>Status</th>
-                    <th><a class="btn btn-primary" href="">Add</a></th>
+                    <th><a class="btn btn-primary" href="{{ Route('vendor.create') }}">Add</a></th>
                 </tr>
             </thead>
 

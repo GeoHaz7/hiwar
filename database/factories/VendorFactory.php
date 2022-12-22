@@ -18,10 +18,10 @@ class VendorFactory extends Factory
     {
         return [
             'full_name' => fake()->name(),
-            'bio' => fake()->word(7),
+            'bio' => fake()->sentence(6, true),
             'status' => fake()->boolean(),
             'address' => fake()->streetAddress(),
-            'phone' => fake()->numerify('059#######'),
+            'phone' => fake()->numerify('+97059#######'),
             'user_id' => function () {
                 return \App\Models\User::factory(1)->create()->pluck('user_id')[0];
             }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -39,6 +40,35 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        $id = null;
+
+        if ($request->hasFile('file')) {
+            $id = app('App\Http\Controllers\ImagesController')->store($request)['images_id'];
+            // return $id;
+        }
+
+
+        $user = User::create([
+            'username' => $request->vendorUsername,
+            'email' => $request->vendorEmail,
+            'password' => bcrypt($request->vendorPassword),
+            'type' => 2
+        ]);
+
+
+        Vendor::create([
+            'full_name' => $request->vendorFullName,
+            'bio' => $request->vendorBio,
+            'status' => 1,
+            'address' => $request->vendorAddress,
+            'phone' => $request->vendorPhone,
+            'user_id' => $user->user_id,
+            'profile_image' => $id,
+        ]);
+
+        return response()->json('success');
     }
 
     /**
@@ -70,9 +100,12 @@ class VendorController extends Controller
      * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vendor $vendor)
+    public function update(Request $request, Vendor $vendor, $id)
     {
-        //
+        $user = User::where('user_id', $id)->get()[0];
+        $vendor = Vendor::where('user_id', $id)->get()[0];
+
+        return view('pages.vendors.editVendor', ['user' => $user, 'vendor' => $vendor]);
     }
 
     /**

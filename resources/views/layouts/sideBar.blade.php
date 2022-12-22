@@ -63,12 +63,12 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">Add Vendor
+                                    <a href="{{ route('vendor.create') }}">Add Vendor
                                         {{-- <span class="badge badge-pill badge-success">Pro</span> --}}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">Edit Vendor</a>
+                                    <a href="">Edit Vendor</a>
                                 </li>
                                 <li>
                                     <a href="#">Delete</a>

@@ -3,10 +3,27 @@
 @section('content')
     <div class="container d-flex justify-content-center">
         <div>
-            <h2 class="card-title mt-3 text-center">Create Account as a Vendor</h2>
-            <p class="text-center">Get started with your free account</p>
+            <h2 class="card-title mt-3 text-center ">Add A Vendor Account</h2>
+            {{-- <p class="text-center">Get started with your free account</p> --}}
 
-            <form id="vendorForm" class="mainForm ">
+            <form id="vendorForm" class="mainForm mt-5 ">
+                <div class="center mb-3">
+                    <div class="form-input">
+                        <div class="preview">
+                            <img class="mx-auto mb-3" id="file-ip-1-preview">
+                        </div>
+
+                        <label for="file-ip-1">Upload Image</label>
+                        <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+                    </div>
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user-secret"></i> </span>
+                    </div>
+                    <input id="vendorUsername" name="vendorUsername" class="form-control" placeholder="Username"
+                        type="text">
+                </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
@@ -71,9 +88,9 @@
                         placeholder="Repeat password" type="password">
                 </div> <!-- form-group// -->
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Create Account </button>
+                    <button type="submit" class="btn btn-primary btn-block"> Create Vendor Account </button>
                 </div> <!-- form-group// -->
-                <p class="text-center">Have an account? <a href="">Log In</a> </p>
+                {{-- <p class="text-center">Have an account? <a href="">Log In</a> </p> --}}
             </form>
         </div>
     </div>
@@ -83,9 +100,23 @@
     <script>
         $(document).ready(function() {
 
+            document.getElementById('file-ip-1').addEventListener('change', function showPreview(event) {
+                if (event.target.files.length > 0) {
+                    var src = URL.createObjectURL(event.target.files[0]);
+                    var preview = document.getElementById("file-ip-1-preview");
+                    preview.src = src;
+                    preview.style.display = "block";
+
+                }
+            });
+
+
             $('#vendorForm').validate({
                 rules: {
                     vendorFullName: {
+                        required: true,
+                    },
+                    vendorUsername: {
                         required: true,
                     },
                     vendorEmail: {
@@ -116,10 +147,12 @@
                 submitHandler: function(form) {
                     var fd = new FormData();
                     fd.append('vendorFullName', $('#vendorFullName').val());
+                    fd.append('vendorUsername', $('#vendorUsername').val());
                     fd.append('vendorEmail', $('#vendorEmail').val());
                     fd.append('vendorPhone', $('#vendorPhone').val());
                     fd.append('vendorAddress', $('#vendorAddress').val());
                     fd.append('vendorBio', $('#vendorBio').val());
+                    fd.append('file', $('#file-ip-1')[0].files[0]);
                     fd.append('vendorPassword', $('#vendorPassword').val());
                     fd.append('_token', '{{ csrf_token() }}');
 
@@ -138,7 +171,7 @@
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
                                 if (response == 'success') {
-                                    window.location = '/';
+                                    // window.location = '/';
 
                                 }
                             });

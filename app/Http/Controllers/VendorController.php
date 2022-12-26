@@ -16,9 +16,11 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $users = Vendor::select('*');
 
-        return DataTables::eloquent($users)
+        $vendors = Vendor::select('vendor_id', 'phone', 'full_name', 'address', 'status')->leftjoin('users', 'users.user_id', '=', 'vendors.user_id');
+
+
+        return DataTables::eloquent($vendors)
             ->make(true);
     }
 
@@ -88,9 +90,13 @@ class VendorController extends Controller
      * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vendor $vendor)
+    public function edit(Vendor $vendor, $id)
     {
-        //
+        $vendor = Vendor::where('vendor_id', $id)->first();
+        $user = $vendor->user()->first();
+
+
+        return view('pages.vendors.editVendor', ['user' => $user, 'vendor' => $vendor]);
     }
 
     /**
@@ -100,12 +106,8 @@ class VendorController extends Controller
      * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vendor $vendor, $id)
+    public function update(Request $request, Vendor $vendor)
     {
-        $user = User::where('user_id', $id)->get()[0];
-        $vendor = Vendor::where('user_id', $id)->get()[0];
-
-        return view('pages.vendors.editVendor', ['user' => $user, 'vendor' => $vendor]);
     }
 
     /**
@@ -114,8 +116,16 @@ class VendorController extends Controller
      * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vendor $vendor)
+    public function destroy(Vendor $vendor, $id)
     {
-        //
+        $vendor = Vendor::where('vendor_id', $id)->first();
+        $user = $vendor->user();
+
+
+        $vendor->delete();
+        $user->delete();
+
+
+        return response()->json('success');
     }
 }

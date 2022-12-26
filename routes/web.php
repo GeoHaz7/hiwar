@@ -27,4 +27,5 @@ Route::get('/vendors', [App\Http\Controllers\VendorController::class, 'show'])->
 
 Route::get('/vendor/create', [App\Http\Controllers\VendorController::class, 'create'])->name('vendor.create');
 Route::post('/vendor/store', [App\Http\Controllers\VendorController::class, 'store'])->name('vendor.store');
-Route::get('/vendor/edit/{id}', [App\Http\Controllers\VendorController::class, 'update'])->name('vendor.update');
+Route::get('/vendor/edit/{id}', [App\Http\Controllers\VendorController::class, 'edit'])->name('vendor.edit');
+Route::delete('/vendor/destroy/{id}', [App\Http\Controllers\VendorController::class, 'destroy'])->name('vendor.destroy');

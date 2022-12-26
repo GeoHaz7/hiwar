@@ -3,6 +3,8 @@
 @section('content')
     <div class="container">
 
+        <h2 class="card-title mt-3 text-center ">Vendor Account List</h2>
+
         <table id="example"
             class="display stripe table table-striped hover compact dataTable dtr-inline cell-border collapsed"
             style="width:100%">
@@ -49,6 +51,7 @@
                         "data": "status"
                     },
                     {
+                        "data": "vendor_id",
                         orderable: false,
                         render: function(data, type, row, meta) {
                             return ('<i class="fa fa-edit text-primary" data-id="' +
@@ -59,6 +62,41 @@
                         }
                     }
                 ]
+            });
+            // Delete a record
+            $('#example').on('click', '.editor-delete', function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                var url = "{{ route('vendor.destroy', ':id') }}";
+                url = url.replace(':id', id);
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Are you sure ?',
+                    showDenyButton: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    $.ajax({
+                        url: url,
+                        type: "DELETE",
+                        data: {
+                            '_token': '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            table.ajax.reload(null);
+                            if (response == 'success') {}
+                        },
+                        error: function(err) {}
+                    });
+                });
+            });
+            // edit a record
+            $('#example').on('click', '.fa-edit', function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                var url = "{{ route('vendor.edit', ':id') }}";
+                url = url.replace(':id', id);
+                window.location.href = url;
             });
 
 

@@ -67,12 +67,6 @@
                                         {{-- <span class="badge badge-pill badge-success">Pro</span> --}}
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="">Edit Vendor</a>
-                                </li>
-                                <li>
-                                    <a href="#">Delete</a>
-                                </li>
                             </ul>
                         </div>
                     </li>

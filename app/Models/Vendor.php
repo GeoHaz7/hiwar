@@ -24,4 +24,9 @@ class Vendor extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
+
+    public function thumbnail()
+    {
+        return $this->hasOne(Images::class, 'images_id', 'thumbnail');
+    }
 }

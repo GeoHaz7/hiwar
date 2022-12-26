@@ -19,7 +19,6 @@ class VendorController extends Controller
 
         $vendors = Vendor::select('vendor_id', 'phone', 'full_name', 'address', 'status')->leftjoin('users', 'users.user_id', '=', 'vendors.user_id');
 
-
         return DataTables::eloquent($vendors)
             ->make(true);
     }

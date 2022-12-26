@@ -5,7 +5,6 @@
         <div>
             <h2 class="card-title mt-3 text-center ">Add A Vendor Account</h2>
             {{-- <p class="text-center">Get started with your free account</p> --}}
-
             <form id="vendorForm" class="mainForm mt-5 ">
                 <div class="center mb-3">
                     <div class="form-input">
@@ -158,7 +157,7 @@
                     fd.append('_token', '{{ csrf_token() }}');
 
                     $.ajax({
-                        url: "{{ route('vendor.store') }}",
+                        url: "",
                         type: "POST",
                         processData: false,
                         contentType: false,

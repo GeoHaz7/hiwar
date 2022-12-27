@@ -116,12 +116,14 @@ class VendorController extends Controller
         $image = Images::where('images_id', $vendor->profile_image)->first();
 
 
-        $idd = null;
 
-        Images::where('filename', $image->filename)->delete();
-        $path = public_path('uploads/gallery/') . $image->filename;
-        if (file_exists($path)) {
-            unlink($path);
+        $idd = null;
+        if ($image) {
+            Images::where('filename', $image->filename)->delete();
+            $path = public_path('uploads/gallery/') . $image->filename;
+            if (file_exists($path)) {
+                unlink($path);
+            }
         }
 
         if ($request->hasFile('file')) {
@@ -133,7 +135,7 @@ class VendorController extends Controller
         $user->update([
             'username' => $request->vendorUsername,
             'email' => $request->vendorEmail,
-            'password' => bcrypt($request->vendorPassword),
+            'password' => $request->vendorPassword ? bcrypt($request->vendorPassword) : $user->password,
             'type' => 2
         ]);
 

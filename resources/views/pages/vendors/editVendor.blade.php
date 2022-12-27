@@ -4,7 +4,7 @@
     <div class="container d-flex justify-content-center">
         <div>
             {{-- {{ dd($vendor->thumbnail->filename) }} --}}
-            <h2 class="card-title mt-3 text-center ">Add A Vendor Account</h2>
+            <h2 class="card-title mt-3 text-center ">Edit A Vendor Account</h2>
             {{-- <p class="text-center">Get started with your free account</p> --}}
             <form id="vendorForm" class="mainForm mt-5 ">
                 <div class="center mb-3">
@@ -90,7 +90,7 @@
                         placeholder="Repeat password" type="password">
                 </div> <!-- form-group// -->
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Create Vendor Account </button>
+                    <button type="submit" class="btn btn-primary btn-block"> Edit Vendor Account </button>
                 </div> <!-- form-group// -->
                 {{-- <p class="text-center">Have an account? <a href="">Log In</a> </p> --}}
             </form>
@@ -173,7 +173,7 @@
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
                                 if (response == 'success') {
-                                    // window.location = '/';
+                                    window.location = '/vendors';
 
                                 }
                             });

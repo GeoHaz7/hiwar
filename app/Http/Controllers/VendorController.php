@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Images;
+use App\Models\Image;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
@@ -113,24 +113,15 @@ class VendorController extends Controller
     {
         $vendor = Vendor::where('vendor_id', $id)->first();
         $user = User::where('user_id', $vendor->user_id)->first();
-        $image = Images::where('images_id', $vendor->profile_image)->first();
+        $image = Image::where('images_id', $vendor->profile_image)->first();
 
 
 
-        $idd = null;
-        if ($image) {
-            Images::where('filename', $image->filename)->delete();
-            $path = public_path('uploads/gallery/') . $image->filename;
-            if (file_exists($path)) {
-                unlink($path);
-            }
-        }
-
+        $idd = $vendor->profile_image;
         if ($request->hasFile('file')) {
             $idd = app('App\Http\Controllers\ImagesController')->store($request)['images_id'];
-            // return $id;
+            app('App\Http\Controllers\ImagesController')->destroy($image->filename);
         }
-
 
         $user->update([
             'username' => $request->vendorUsername,

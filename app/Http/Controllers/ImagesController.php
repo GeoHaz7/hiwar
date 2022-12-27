@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Images;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class ImagesController extends Controller
@@ -43,7 +43,7 @@ class ImagesController extends Controller
             $file_name = $filename . '-' . time() . '.' . $extension;
             $image->move(public_path('uploads/gallery'), $file_name);
 
-            $imageUpload = new Images();
+            $imageUpload = new Image();
             $imageUpload->original_filename = $fileInfo;
             $imageUpload->filename = $file_name;
             $imageUpload->save();
@@ -58,7 +58,7 @@ class ImagesController extends Controller
      * @param  \App\Models\Images  $images
      * @return \Illuminate\Http\Response
      */
-    public function show(Images $images)
+    public function show(Image $images)
     {
         //
     }
@@ -69,7 +69,7 @@ class ImagesController extends Controller
      * @param  \App\Models\Images  $images
      * @return \Illuminate\Http\Response
      */
-    public function edit(Images $images)
+    public function edit(Image $images)
     {
         //
     }
@@ -81,7 +81,7 @@ class ImagesController extends Controller
      * @param  \App\Models\Images  $images
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Images $images)
+    public function update(Request $request, Image $images)
     {
         //
     }
@@ -92,10 +92,10 @@ class ImagesController extends Controller
      * @param  \App\Models\Images  $images
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($filename)
     {
-        $filename =  $request->get('filename');
-        Images::where('filename', $filename)->delete();
+        // $filename =  $request->get('filename');
+        Image::where('filename', $filename)->delete();
         $path = public_path('uploads/gallery/') . $filename;
         if (file_exists($path)) {
             unlink($path);

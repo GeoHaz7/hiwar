@@ -16,12 +16,15 @@ class VendorFactory extends Factory
      */
     public function definition()
     {
+        static $count = 1;
+
         return [
             'full_name' => fake()->name(),
             'bio' => fake()->sentence(6, true),
             'status' => fake()->boolean(),
             'address' => fake()->streetAddress(),
             'phone' => fake()->numerify('+97059#######'),
+            'profile_image' => $count++,
             'user_id' => function () {
                 return \App\Models\User::factory(1)->create()->pluck('user_id')[0];
             }

@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Page;
 use App\Models\User;
+use App\Models\Image;
 use App\Models\Vendor;
 use Illuminate\Database\Seeder;
 
@@ -30,7 +32,9 @@ class DatabaseSeeder extends Seeder
             'type' => '0',
         ]);
 
-        \App\Models\Vendor::factory(4)->create();
+        Vendor::factory(4)->create();
+        Page::factory(4)->create();
+        Image::factory(4)->create();
 
         // User::create([
         //     'nickname' => 'Oriana_Element',

@@ -45,6 +45,8 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script type="text/javascript" src="{{ url('assets/DataTables/datatables.min.js') }}"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        {{-- ckeditor --}}
+        <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

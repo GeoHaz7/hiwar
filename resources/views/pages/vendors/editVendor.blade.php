@@ -1,70 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container d-flex justify-content-center">
-        <div>
-            {{-- {{ dd($vendor->thumbnail->filename) }} --}}
-            <h2 class="card-title mt-3 text-center ">Edit A Vendor Account</h2>
-            {{-- <p class="text-center">Get started with your free account</p> --}}
-            <form id="vendorForm" class="mainForm mt-5 ">
-                <div class="center mb-3">
-                    <div class="form-input">
-                        <div class="preview">
-                            <img class="mx-auto mb-3 d-block" id="file-ip-1-preview"
-                                src="{{ $vendor->thumbnail ? url('uploads/gallery') . '/' . $vendor->thumbnail->filename : 'https://www.kindpng.com/picc/m/24-248253_user-prof`ile-default-image-png-clipart-png-download.png' }}">
-                        </div>
+    <div class="container col-10 py-3">
+        {{-- {{ dd($vendor->thumbnail->filename) }} --}}
+        <h2 class="card-title mt-3 text-center ">Edit A Vendor Account</h2>
+        {{-- <p class="text-center">Get started with your free account</p> --}}
+        <form id="vendorForm" class="mt-5 ">
+            <div class="center mb-3">
+                <div class="form-input">
+                    <div class="preview">
+                        <img class="mx-auto mb-3 d-block" id="file-ip-1-preview"
+                            src="{{ $vendor->thumbnail ? url('uploads/gallery') . '/' . $vendor->thumbnail->filename : 'https://www.kindpng.com/picc/m/24-248253_user-prof`ile-default-image-png-clipart-png-download.png' }}">
+                    </div>
 
-                        <label for="file-ip-1">Upload Image</label>
-                        <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
-                    </div>
+                    <label for="file-ip-1">Upload Image</label>
+                    <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
                 </div>
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user-secret"></i> </span>
-                    </div>
-                    <input id="vendorUsername" name="vendorUsername" value="{{ $user->username }}" class="form-control"
-                        placeholder="Username" type="text">
-                </div> <!-- form-group// -->
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                    </div>
-                    <input id="vendorFullName" name="vendorFullName" value="{{ $vendor->full_name }}" class="form-control"
-                        placeholder="Full name" type="text">
-                </div> <!-- form-group// -->
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-                    </div>
-                    <input id="vendorEmail" name="vendorEmail" value="{{ $user->email }}" class="form-control"
-                        placeholder="Email address" type="email">
-                </div> <!-- form-group// -->
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-                    </div>
-                    <select class="custom-select" style="max-width: 120px;">
-                        <option value="+970" selected="">+970</option>
-                        <option value="+972">+972</option>
-                    </select>
-                    <input id="vendorPhone" name="vendorPhone"value="{{ substr($vendor->phone, 3) }}" class="form-control"
-                        placeholder="Phone number" type="text">
-                </div> <!-- form-group// -->
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-home"></i> </span>
-                    </div>
-                    <input id="vendorAddress" name="vendorAddress" value="{{ $vendor->address }}" class="form-control"
-                        placeholder="Address" type="text">
-                </div> <!-- form-group// -->
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-pencil"></i> </span>
-                    </div>
-                    <input id="vendorBio" name="vendorBio" value="{{ $vendor->bio }}" class="form-control"
-                        placeholder="Bio" type="text">
-                </div> <!-- form-group// -->
-                {{-- <div class="form-group input-group">
+            </div>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-user-secret"></i> </span>
+                </div>
+                <input id="vendorUsername" name="vendorUsername" value="{{ $user->username }}" class="form-control"
+                    placeholder="Username" type="text">
+            </div> <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                </div>
+                <input id="vendorFullName" name="vendorFullName" value="{{ $vendor->full_name }}" class="form-control"
+                    placeholder="Full name" type="text">
+            </div> <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                </div>
+                <input id="vendorEmail" name="vendorEmail" value="{{ $user->email }}" class="form-control"
+                    placeholder="Email address" type="email">
+            </div> <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                </div>
+                <select class="custom-select" style="max-width: 120px;">
+                    <option value="+970" selected="">+970</option>
+                    <option value="+972">+972</option>
+                </select>
+                <input id="vendorPhone" name="vendorPhone"value="{{ substr($vendor->phone, 3) }}" class="form-control"
+                    placeholder="Phone number" type="text">
+            </div> <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-home"></i> </span>
+                </div>
+                <input id="vendorAddress" name="vendorAddress" value="{{ $vendor->address }}" class="form-control"
+                    placeholder="Address" type="text">
+            </div> <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-pencil"></i> </span>
+                </div>
+                <input id="vendorBio" name="vendorBio" value="{{ $vendor->bio }}" class="form-control" placeholder="Bio"
+                    type="text">
+            </div> <!-- form-group// -->
+            {{-- <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-building"></i> </span>
                     </div>
@@ -75,26 +74,25 @@
                         <option>Accaunting</option>
                     </select>
                 </div> <!-- form-group end.// --> --}}
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                    </div>
-                    <input id="vendorPassword" name="vendorPassword" class="form-control" placeholder="Create password"
-                        type="password">
-                </div> <!-- form-group// -->
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                    </div>
-                    <input id="vendorPassword_confirm" name="vendorPassword_confirm" class="form-control"
-                        placeholder="Repeat password" type="password">
-                </div> <!-- form-group// -->
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Edit Vendor Account </button>
-                </div> <!-- form-group// -->
-                {{-- <p class="text-center">Have an account? <a href="">Log In</a> </p> --}}
-            </form>
-        </div>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                </div>
+                <input id="vendorPassword" name="vendorPassword" class="form-control" placeholder="Create password"
+                    type="password">
+            </div> <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                </div>
+                <input id="vendorPassword_confirm" name="vendorPassword_confirm" class="form-control"
+                    placeholder="Repeat password" type="password">
+            </div> <!-- form-group// -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block"> Edit Vendor Account </button>
+            </div> <!-- form-group// -->
+            {{-- <p class="text-center">Have an account? <a href="">Log In</a> </p> --}}
+        </form>
     </div>
 @endsection
 
@@ -173,7 +171,7 @@
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
                                 if (response == 'success') {
-                                    window.location = '/vendors';
+                                    window.location = '/vendor';
 
                                 }
                             });

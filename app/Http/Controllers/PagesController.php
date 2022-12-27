@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\Image;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class PagesController extends Controller
 {
@@ -14,9 +16,11 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $page = Page::select('*');
 
-        return Page::eloquent($page)
+        $page = Page::select('page_id', 'title', 'brief', 'description', 'filename', 'status')->leftjoin('images', 'images.images_id', '=', 'pages.feature_image');;
+
+
+        return DataTables::eloquent($page)
             ->make(true);
     }
 
@@ -27,7 +31,7 @@ class PagesController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.pages.createPage');
     }
 
     /**
@@ -38,7 +42,20 @@ class PagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        if ($request->hasFile('file')) {
+            $id = app('App\Http\Controllers\ImagesController')->store($request)['images_id'];
+            // return $id;
+        }
+        Page::create([
+            'title' => $request->pageTitle,
+            'brief' => $request->pageBrief,
+            'description' => $request->pageDescription,
+            'status' => 1,
+            'feature_image' => $id,
+        ]);
+
+        return response()->json('success');
     }
 
     /**
@@ -49,7 +66,7 @@ class PagesController extends Controller
      */
     public function show(Page $pages)
     {
-        //
+        return view('pages.pages.listPages');
     }
 
     /**
@@ -58,9 +75,12 @@ class PagesController extends Controller
      * @param  \App\Models\Pages  $pages
      * @return \Illuminate\Http\Response
      */
-    public function edit(Page $pages)
+    public function edit(Page $pages, $id)
     {
-        //
+        $page = Page::where('page_id', $id)->first();
+
+
+        return view('pages.pages.editPage', ['page' => $page]);
     }
 
     /**
@@ -70,9 +90,29 @@ class PagesController extends Controller
      * @param  \App\Models\Pages  $pages
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Page $pages)
+    public function update(Request $request, Page $pages, $id)
     {
-        //
+        $page = Page::where('page_id', $id)->first();
+        $image = Image::where('images_id', $page->feature_image)->first();
+
+
+
+        $idd = $page->feature_image;
+        if ($request->hasFile('file')) {
+            $idd = app('App\Http\Controllers\ImagesController')->store($request)['images_id'];
+            if ($image)
+                app('App\Http\Controllers\ImagesController')->destroy($image->filename);
+        }
+
+        $page->update([
+            'title' => $request->pageTitle,
+            'brief' => $request->pageBrief,
+            'description' => $request->pageDescription,
+            'status' => 1,
+            'feature_image' => $idd,
+        ]);
+
+        return response()->json('success');
     }
 
     /**

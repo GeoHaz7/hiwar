@@ -72,22 +72,23 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="fa fa-shopping-cart"></i>
-                            <span>E-commerce</span>
-                            <span class="badge badge-pill badge-danger">3</span>
+                            <i class="fa fa-tachometer-alt"></i>
+                            <span>Pages</span>
+                            <span class="badge badge-pill badge-warning">New</span>
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
                                 <li>
-                                    <a href="#">Products
-
+                                    <a href="{{ route('page.list') }}">All Pages
+                                        {{-- <span
+                                         class="badge badge-pill badge-success"
+                                         >Pro</span> --}}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">Orders</a>
-                                </li>
-                                <li>
-                                    <a href="#">Credit cart</a>
+                                    <a href="{{ route('page.create') }}">Add Page
+                                        {{-- <span class="badge badge-pill badge-success">Pro</span> --}}
+                                    </a>
                                 </li>
                             </ul>
                         </div>

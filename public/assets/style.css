@@ -512,10 +512,6 @@ body {
     transform: translateY(-65%);
 }
 
-.mainForm {
-    width: 130vh;
-}
-
 .listVendorProfile {
     width: 80px;
     height: 80px;

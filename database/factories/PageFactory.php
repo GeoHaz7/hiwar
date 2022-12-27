@@ -20,7 +20,8 @@ class PageFactory extends Factory
             'title' => fake()->sentence(5),
             'brief' => fake()->sentence(12, true),
             'description' => fake()->sentence(25),
-
+            'description' => fake()->sentence(25),
+            'status' => fake()->boolean(),
         ];
     }
 }

@@ -15,5 +15,11 @@ class Page extends Model
         'brief',
         'description',
         'feature_image',
+        'status',
     ];
+
+    public function thumbnail()
+    {
+        return $this->hasOne(Image::class, 'images_id', 'feature_image');
+    }
 }

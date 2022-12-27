@@ -120,7 +120,8 @@ class VendorController extends Controller
         $idd = $vendor->profile_image;
         if ($request->hasFile('file')) {
             $idd = app('App\Http\Controllers\ImagesController')->store($request)['images_id'];
-            app('App\Http\Controllers\ImagesController')->destroy($image->filename);
+            if ($image)
+                app('App\Http\Controllers\ImagesController')->destroy($image->filename);
         }
 
         $user->update([

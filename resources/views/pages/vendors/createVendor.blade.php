@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container d-flex justify-content-center">
+    <div class="container col-10">
         <div>
             <h2 class="card-title mt-3 text-center ">Add A Vendor Account</h2>
             {{-- <p class="text-center">Get started with your free account</p> --}}
 
-            <form id="vendorForm" class="mainForm mt-5 ">
+            <form id="vendorForm" class="mt-5 ">
                 <div class="center mb-3">
                     <div class="form-input">
                         <div class="preview">
@@ -171,7 +171,7 @@
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
                                 if (response == 'success') {
-                                    window.location = '/vendors';
+                                    window.location = '/vendor';
 
                                 }
                             });

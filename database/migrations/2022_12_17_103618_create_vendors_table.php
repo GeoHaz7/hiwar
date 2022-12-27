@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('profile_image')->nullable();
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

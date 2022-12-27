@@ -120,12 +120,7 @@ class VendorController extends Controller
      */
     public function destroy(Vendor $vendor, $id)
     {
-        $vendor = Vendor::where('vendor_id', $id)->first();
-        $user = $vendor->user();
-
-
-        $vendor->delete();
-        $user->delete();
+        Vendor::where('vendor_id', $id)->first()->delete();
 
 
         return response()->json('success');

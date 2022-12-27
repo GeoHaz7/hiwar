@@ -4,11 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 
 class Vendor extends Model
 {
-    use HasFactory;
+    use HasFactory,
+        SoftDeletes,
+        CascadeSoftDeletes;
+
     protected $primaryKey = 'vendor_id';
+    protected $cascadeDeletes = ['user'];
     protected $fillable = [
         'full_name',
         'bio',
@@ -18,6 +24,7 @@ class Vendor extends Model
         'user_id',
         'profile_image'
     ];
+
 
 
     public function user()

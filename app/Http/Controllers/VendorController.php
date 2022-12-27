@@ -17,7 +17,10 @@ class VendorController extends Controller
     public function index()
     {
 
-        $vendors = Vendor::select('vendor_id', 'phone', 'full_name', 'address', 'status')->leftjoin('users', 'users.user_id', '=', 'vendors.user_id');
+        $vendors = Vendor::select('vendor_id', 'phone', 'full_name', 'address', 'status', 'filename')
+            ->leftjoin('users', 'users.user_id', '=', 'vendors.user_id')
+            ->leftjoin('images', 'images.images_id', '=', 'vendors.profile_image');
+
 
         return DataTables::eloquent($vendors)
             ->make(true);

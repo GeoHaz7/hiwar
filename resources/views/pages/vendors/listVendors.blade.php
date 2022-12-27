@@ -33,9 +33,15 @@
                 "ajax": "{{ route('vendor.data') }}",
 
                 "columns": [{
+                        "data": "filename",
                         orderable: false,
-                        "render": function() {
-                            return '<img class="listVendorProfile" src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png" />';
+                        render: function(data, type, row, meta) {
+                            if (data) {
+                                return '<img class="listVendorProfile" src="{{ url('uploads/gallery') . '/' }}' +
+                                    data + '" />';
+                            }
+
+                            return '<img class="listVendorProfile" src="https://www.kindpng.com/picc/m/24-248253_user-prof`ile-default-image-png-clipart-png-download.png" />';
                         }
                     },
                     {

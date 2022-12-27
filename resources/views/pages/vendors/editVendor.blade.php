@@ -3,13 +3,15 @@
 @section('content')
     <div class="container d-flex justify-content-center">
         <div>
+            {{-- {{ dd($vendor->thumbnail->filename) }} --}}
             <h2 class="card-title mt-3 text-center ">Add A Vendor Account</h2>
             {{-- <p class="text-center">Get started with your free account</p> --}}
             <form id="vendorForm" class="mainForm mt-5 ">
                 <div class="center mb-3">
                     <div class="form-input">
                         <div class="preview">
-                            <img class="mx-auto mb-3" id="file-ip-1-preview">
+                            <img class="mx-auto mb-3 d-block" id="file-ip-1-preview"
+                                src="{{ $vendor->thumbnail ? url('uploads/gallery') . '/' . $vendor->thumbnail->filename : '' }}">
                         </div>
 
                         <label for="file-ip-1">Upload Image</label>

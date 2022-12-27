@@ -159,7 +159,7 @@
                     fd.append('_token', '{{ csrf_token() }}');
 
                     $.ajax({
-                        url: "",
+                        url: "{{ route('vendor.update', ['id' => $vendor->vendor_id]) }}",
                         type: "POST",
                         processData: false,
                         contentType: false,

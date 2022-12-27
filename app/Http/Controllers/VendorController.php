@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Images;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
@@ -108,8 +109,46 @@ class VendorController extends Controller
      * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vendor $vendor)
+    public function update(Request $request, Vendor $vendor, $id)
     {
+        $vendor = Vendor::where('vendor_id', $id)->first();
+        $user = User::where('user_id', $vendor->user_id)->first();
+        $image = Images::where('images_id', $vendor->profile_image)->first();
+
+
+        $idd = null;
+
+        Images::where('filename', $image->filename)->delete();
+        $path = public_path('uploads/gallery/') . $image->filename;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+
+        if ($request->hasFile('file')) {
+            $idd = app('App\Http\Controllers\ImagesController')->store($request)['images_id'];
+            // return $id;
+        }
+
+
+        $user->update([
+            'username' => $request->vendorUsername,
+            'email' => $request->vendorEmail,
+            'password' => bcrypt($request->vendorPassword),
+            'type' => 2
+        ]);
+
+
+        $vendor->update([
+            'full_name' => $request->vendorFullName,
+            'bio' => $request->vendorBio,
+            'status' => 1,
+            'address' => $request->vendorAddress,
+            'phone' => $request->vendorPhone,
+            'user_id' => $user->user_id,
+            'profile_image' => $idd,
+        ]);
+
+        return response()->json('success');
     }
 
     /**

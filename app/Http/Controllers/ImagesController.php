@@ -92,8 +92,14 @@ class ImagesController extends Controller
      * @param  \App\Models\Images  $images
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Images $images)
+    public function destroy(Request $request)
     {
-        //
+        $filename =  $request->get('filename');
+        Images::where('filename', $filename)->delete();
+        $path = public_path('uploads/gallery/') . $filename;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        return response()->json(['success' => $filename]);
     }
 }

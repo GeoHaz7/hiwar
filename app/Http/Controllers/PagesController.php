@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\Album;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -43,17 +44,28 @@ class PagesController extends Controller
     public function store(Request $request)
     {
 
+
+
         if ($request->hasFile('file')) {
             $id = app('App\Http\Controllers\ImagesController')->store($request)['image_id'];
             // return $id;
         }
-        Page::create([
+
+        $page = Page::create([
             'title' => $request->pageTitle,
             'brief' => $request->pageBrief,
             'description' => $request->pageDescription,
             'status' => 1,
             'feature_image' => $id,
         ]);
+
+        if ($request->image_array) {
+            foreach (explode(',', $request->image_array) as $single) {
+                $album_images = new Album();
+                $album_images->image_id =  $single;
+                $page->album()->save($album_images);
+            }
+        }
 
         return response()->json('success');
     }

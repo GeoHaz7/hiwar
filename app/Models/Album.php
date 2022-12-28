@@ -13,4 +13,9 @@ class Album extends Model
     {
         return $this->morphTo();
     }
+
+    public function images()
+    {
+        return $this->belongsTo(Image::class, 'image_id', 'image_id');
+    }
 }

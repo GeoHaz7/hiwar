@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Album;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class AlbumController extends Controller
@@ -35,7 +36,6 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**

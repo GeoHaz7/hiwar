@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Page;
 use App\Models\Image;
 use Illuminate\Http\Request;
 
@@ -33,8 +34,11 @@ class ImagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
     public function store(Request $request)
     {
+
         if ($request->file('file')) {
             $image = $request->file('file');
             $fileInfo = $image->getClientOriginalName();
@@ -58,9 +62,21 @@ class ImagesController extends Controller
      * @param  \App\Models\Images  $images
      * @return \Illuminate\Http\Response
      */
-    public function show(Image $images)
+    public function show(Request $request, Image $images)
     {
-        //
+        $id = $request->id;
+        if ($id) {
+            $images = Page::find($id)->album;
+        }
+        foreach ($images as $image) {
+            $image = $image->images;
+            $obj['name'] =  $image->filename;
+            $file_path = public_path('uploads/gallery/') . $image->filename;
+            $obj['size'] = filesize($file_path);
+            $obj['path'] = url('uploads/gallery/' . $image->filename);
+            $data[] = $obj;
+        }
+        return response()->json($data);
     }
 
     /**
@@ -95,6 +111,17 @@ class ImagesController extends Controller
     public function destroy($filename)
     {
         // $filename =  $request->get('filename');
+        Image::where('filename', $filename)->delete();
+        $path = public_path('uploads/gallery/') . $filename;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        return response()->json(['success' => $filename]);
+    }
+
+    public function delete(Request $request)
+    {
+        $filename =  $request->get('filename');
         Image::where('filename', $filename)->delete();
         $path = public_path('uploads/gallery/') . $filename;
         if (file_exists($path)) {

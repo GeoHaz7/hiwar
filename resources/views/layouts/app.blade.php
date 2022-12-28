@@ -10,8 +10,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link rel="stylesheet" href="{{ URL::asset('assets/style.css') }} 
-">
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,6 +22,10 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Dropzone -->
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url('vendor/css/dropzone.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/style.css') }}" />
 
     <script src="https://kit.fontawesome.com/619361f126.js" crossorigin="anonymous"></script>
     <!-- Scripts -->
@@ -39,58 +42,63 @@
                 @yield('content')
             </main>
         </div>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
-            integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script type="text/javascript" src="{{ url('assets/DataTables/datatables.min.js') }}"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        {{-- ckeditor --}}
-        <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+        integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="{{ url('assets/DataTables/datatables.min.js') }}"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    {{-- ckeditor --}}
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <script>
-            jQuery(function($) {
+    {{-- Dropzone --}}
+    <script src="{{ url('vendor/js/dropzone.js') }}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
 
-                $(".sidebar-dropdown > a").click(function() {
-                    $(".sidebar-submenu").slideUp(200);
-                    if (
-                        $(this)
+    <script>
+        jQuery(function($) {
+
+            $(".sidebar-dropdown > a").click(function() {
+                $(".sidebar-submenu").slideUp(200);
+                if (
+                    $(this)
+                    .parent()
+                    .hasClass("active")
+                ) {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this)
                         .parent()
-                        .hasClass("active")
-                    ) {
-                        $(".sidebar-dropdown").removeClass("active");
-                        $(this)
-                            .parent()
-                            .removeClass("active");
-                    } else {
-                        $(".sidebar-dropdown").removeClass("active");
-                        $(this)
-                            .next(".sidebar-submenu")
-                            .slideDown(200);
-                        $(this)
-                            .parent()
-                            .addClass("active");
-                    }
-                });
-
-                $("#close-sidebar").click(function() {
-                    $(".page-wrapper").removeClass("toggled");
-                    $(".mainContent").removeClass("toggled");
-                });
-                $("#show-sidebar").click(function() {
-                    $(".page-wrapper").addClass("toggled");
-                    $(".mainContent").addClass("toggled");
-                });
-
-
-
-
+                        .removeClass("active");
+                } else {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this)
+                        .next(".sidebar-submenu")
+                        .slideDown(200);
+                    $(this)
+                        .parent()
+                        .addClass("active");
+                }
             });
-        </script>
 
-        @yield('js')
+            $("#close-sidebar").click(function() {
+                $(".page-wrapper").removeClass("toggled");
+                $(".mainContent").removeClass("toggled");
+            });
+            $("#show-sidebar").click(function() {
+                $(".page-wrapper").addClass("toggled");
+                $(".mainContent").addClass("toggled");
+            });
+
+
+
+
+        });
+    </script>
+
+    @yield('js')
 </body>
 
 </html>

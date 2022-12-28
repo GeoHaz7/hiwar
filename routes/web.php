@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImagesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,3 +38,9 @@ Route::post('/page/store', [App\Http\Controllers\PagesController::class, 'store'
 Route::get('/page/edit/{id}', [App\Http\Controllers\PagesController::class, 'edit'])->name('page.edit');
 Route::post('/page/update/{id}', [App\Http\Controllers\PagesController::class, 'update'])->name('page.update');
 Route::delete('/page/destroy/{id}', [App\Http\Controllers\PagesController::class, 'destroy'])->name('page.destroy');
+
+
+//image routes
+Route::get('image/show', [ImagesController::class, 'show'])->name('image.show');
+Route::post('image/store', [ImagesController::class, 'store'])->name('image.store');
+Route::post('image/delete', [ImagesController::class, 'delete'])->name('image.delete');

@@ -39,7 +39,7 @@
 
                 <textarea class="ckeditor" type="text" class="form-control" id="pageDescription" name="pageDescription">{!! $page->description !!}</textarea>
 
-                <div class="dropzone" id="myDropzone">
+                <div class="dropzone mt-3" id="myDropzone">
 
                     <div class="dz-default dz-message">
                         <h4>Drop Files Here</h4>
@@ -87,7 +87,7 @@
                             myDropzone.options.addedfile.call(myDropzone, file);
                             myDropzone.options.thumbnail.call(myDropzone, file,
                                 value.path);
-                                
+
                             myDropzone.emit("complete", file);
                         });
                     }

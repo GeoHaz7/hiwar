@@ -35,17 +35,17 @@
                 <textarea class="ckeditor" type="text" class="form-control" id="pageDescription" name="pageDescription"></textarea>
 
 
-                <form class="dropzone" id="dropzone">
+                <div class="dropzone mt-3" id="myDropzone">
 
                     <div class="dz-default dz-message">
                         <h4>Drop Files Here</h4>
                     </div>
-                </form>
+            </form>
 
-                <div class="form-group mt-3">
-                    <button type="submit" class="btn btn-primary btn-block"> Create Page </button>
-                </div> <!-- form-group// -->
-                {{-- <p class="text-center">Have an account? <a href="">Log In</a> </p> --}}
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary btn-block"> Create Page </button>
+            </div> <!-- form-group// -->
+            {{-- <p class="text-center">Have an account? <a href="">Log In</a> </p> --}}
             </form>
         </div>
     </div>

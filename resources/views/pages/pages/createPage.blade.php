@@ -35,12 +35,12 @@
                 <textarea class="ckeditor" type="text" class="form-control" id="pageDescription" name="pageDescription"></textarea>
 
 
-                <div class="dropzone" id="dropzone">
+                <form class="dropzone" id="dropzone">
 
                     <div class="dz-default dz-message">
                         <h4>Drop Files Here</h4>
                     </div>
-                </div>
+                </form>
 
                 <div class="form-group mt-3">
                     <button type="submit" class="btn btn-primary btn-block"> Create Page </button>

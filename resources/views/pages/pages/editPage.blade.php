@@ -39,6 +39,12 @@
 
                 <textarea class="ckeditor" type="text" class="form-control" id="pageDescription" name="pageDescription">{!! $page->description !!}</textarea>
 
+                <div class="dropzone" id="myDropzone">
+
+                    <div class="dz-default dz-message">
+                        <h4>Drop Files Here</h4>
+                    </div>
+                </div>
 
                 <div class="form-group mt-3">
                     <button type="submit" class="btn btn-primary btn-block"> Edit Page </button>
@@ -50,7 +56,101 @@
 @endsection
 
 @section('js')
-    <script>
+    <script type="text/javascript">
+        var array = [];
+        Dropzone.autoDiscover = false;
+        $('#myDropzone').dropzone({
+            maxFiles: 5,
+            url: "{{ route('image.store') }}",
+            method: 'post',
+            maxFilesize: 4,
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            addRemoveLinks: true,
+            timeout: 50000,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            init: function() {
+                // Get images
+                var myDropzone = this;
+                $.ajax({
+                    url: "{{ route('image.show') }}?id={{ $page->page_id }}",
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $.each(data, function(key, value) {
+
+                            var file = {
+                                name: value.name,
+                                size: value.size
+                            };
+                            myDropzone.options.addedfile.call(myDropzone, file);
+                            myDropzone.options.thumbnail.call(myDropzone, file,
+                                value.path);
+                                
+                            myDropzone.emit("complete", file);
+                        });
+                    }
+                });
+            },
+            removedfile: function(file) {
+                if (this.options.dictRemoveFile) {
+                    return Dropzone.confirm("Are You Sure to " + this.options.dictRemoveFile,
+                        function() {
+                            if (file.previewElement.id != "") {
+                                var name = file.previewElement.id;
+                            } else {
+                                var name = file.name;
+                            }
+
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content')
+                                },
+                                type: 'POST',
+                                url: "{{ route('image.delete') }}",
+                                data: {
+                                    filename: name
+                                },
+                                success: function(data) {
+                                    alert(data.success +
+                                        " File has been successfully removed!");
+                                },
+                                error: function(e) {
+                                    console.log(e);
+                                }
+                            });
+                            var fileRef;
+                            return (fileRef = file.previewElement) != null ?
+                                fileRef.parentNode.removeChild(file.previewElement) : void 0;
+                        });
+                }
+            },
+
+            success: function(file, response) {
+                file.previewElement.id = response.success;
+
+                array.push(response.image_id);
+                file.previewElement.querySelector("img").alt = response.success;
+            },
+            error: function(file, response) {
+                if ($.type(response) === "string")
+                    var message = response; //dropzone sends it's own error messages in string
+                else
+                    var message = response.message;
+                file.previewElement.classList.add("dz-error");
+                _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
+                _results = [];
+                for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                    node = _ref[_i];
+                    _results.push(node.textContent = message);
+                }
+                return _results;
+            }
+
+        });
+
         $(document).ready(function() {
 
             document.getElementById('file-ip-1').addEventListener('change', function showPreview(event) {
@@ -88,6 +188,7 @@
                     fd.append('pageBrief', $('#pageBrief').val());
                     fd.append('pageDescription', CKEDITOR.instances['pageDescription'].getData());
                     fd.append('file', $('#file-ip-1')[0].files[0]);
+                    fd.append('image_array', array);
                     fd.append('_token', '{{ csrf_token() }}');
 
                     $.ajax({

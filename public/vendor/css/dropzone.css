@@ -334,6 +334,7 @@
     transform: scale(1.05, 1.05);
     -webkit-filter: blur(8px);
     filter: blur(8px);
+    max-width: 100%;
 }
 .dropzone .dz-preview .dz-image {
     border-radius: 20px;
@@ -346,6 +347,7 @@
 }
 .dropzone .dz-preview .dz-image img {
     display: block;
+    max-width: 100%;
 }
 .dropzone .dz-preview.dz-success .dz-success-mark {
     -webkit-animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);

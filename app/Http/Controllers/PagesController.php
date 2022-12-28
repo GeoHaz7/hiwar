@@ -124,6 +124,17 @@ class PagesController extends Controller
             'feature_image' => $idd,
         ]);
 
+        // dd($request->all());
+
+
+        if ($request->image_array) {
+            foreach (explode(',', $request->image_array) as $single) {
+                $album_images = new Album();
+                $album_images->image_id =  $single;
+                $page->album()->save($album_images);
+            }
+        }
+
         return response()->json('success');
     }
 

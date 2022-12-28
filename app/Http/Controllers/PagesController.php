@@ -64,7 +64,7 @@ class PagesController extends Controller
      * @param  \App\Models\Pages  $pages
      * @return \Illuminate\Http\Response
      */
-    public function show(Page $pages)
+    public function show()
     {
         return view('pages.pages.listPages');
     }
@@ -75,7 +75,7 @@ class PagesController extends Controller
      * @param  \App\Models\Pages  $pages
      * @return \Illuminate\Http\Response
      */
-    public function edit(Page $pages, $id)
+    public function edit($id)
     {
         $page = Page::where('page_id', $id)->first();
 
@@ -90,7 +90,7 @@ class PagesController extends Controller
      * @param  \App\Models\Pages  $pages
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Page $pages, $id)
+    public function update(Request $request, $id)
     {
         $page = Page::where('page_id', $id)->first();
         $image = Image::where('images_id', $page->feature_image)->first();
@@ -121,8 +121,11 @@ class PagesController extends Controller
      * @param  \App\Models\Pages  $pages
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Page $pages)
+    public function destroy($id)
     {
-        //
+        Page::where('page_id', $id)->first()->delete();
+
+
+        return response()->json('success');
     }
 }

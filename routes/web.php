@@ -36,4 +36,4 @@ Route::get('/page/create', [App\Http\Controllers\PagesController::class, 'create
 Route::post('/page/store', [App\Http\Controllers\PagesController::class, 'store'])->name('page.store');
 Route::get('/page/edit/{id}', [App\Http\Controllers\PagesController::class, 'edit'])->name('page.edit');
 Route::post('/page/update/{id}', [App\Http\Controllers\PagesController::class, 'update'])->name('page.update');
-// Route::delete('/vendor/destroy/{id}', [App\Http\Controllers\VendorController::class, 'destroy'])->name('vendor.destroy');
+Route::delete('/page/destroy/{id}', [App\Http\Controllers\PagesController::class, 'destroy'])->name('page.destroy');

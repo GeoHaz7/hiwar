@@ -82,7 +82,7 @@ class VendorController extends Controller
      * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function show(Vendor $vendor)
+    public function show()
     {
         return view('pages.vendors.listVendors');
     }
@@ -93,7 +93,7 @@ class VendorController extends Controller
      * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vendor $vendor, $id)
+    public function edit($id)
     {
         $vendor = Vendor::where('vendor_id', $id)->first();
         $user = $vendor->user()->first();
@@ -109,7 +109,7 @@ class VendorController extends Controller
      * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vendor $vendor, $id)
+    public function update(Request $request, $id)
     {
         $vendor = Vendor::where('vendor_id', $id)->first();
         $user = User::where('user_id', $vendor->user_id)->first();
@@ -151,7 +151,7 @@ class VendorController extends Controller
      * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vendor $vendor, $id)
+    public function destroy($id)
     {
         Vendor::where('vendor_id', $id)->first()->delete();
 

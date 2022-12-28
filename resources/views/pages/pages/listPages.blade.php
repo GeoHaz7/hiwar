@@ -66,7 +66,7 @@
             $('#example').on('click', '.editor-delete', function(e) {
                 e.preventDefault();
                 var id = $(this).data('id');
-                var url = "";
+                var url = "{{ route('page.destroy', ':id') }}";
                 url = url.replace(':id', id);
                 Swal.fire({
                     icon: 'warning',

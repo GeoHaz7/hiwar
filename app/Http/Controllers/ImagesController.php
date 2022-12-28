@@ -48,7 +48,7 @@ class ImagesController extends Controller
             $imageUpload->filename = $file_name;
             $imageUpload->save();
 
-            return  ['images_id' => $imageUpload->images_id];
+            return  ['image_id' => $imageUpload->image_id];
         }
     }
 

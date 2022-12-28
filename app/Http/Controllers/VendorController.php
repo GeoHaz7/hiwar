@@ -20,7 +20,7 @@ class VendorController extends Controller
 
         $vendors = Vendor::select('vendor_id', 'phone', 'full_name', 'address', 'status', 'filename')
             ->leftjoin('users', 'users.user_id', '=', 'vendors.user_id')
-            ->leftjoin('images', 'images.images_id', '=', 'vendors.profile_image');
+            ->leftjoin('images', 'images.image_id', '=', 'vendors.profile_image');
 
 
         return DataTables::eloquent($vendors)
@@ -50,7 +50,7 @@ class VendorController extends Controller
         $id = null;
 
         if ($request->hasFile('file')) {
-            $id = app('App\Http\Controllers\ImagesController')->store($request)['images_id'];
+            $id = app('App\Http\Controllers\ImagesController')->store($request)['image_id'];
             // return $id;
         }
 
@@ -113,13 +113,13 @@ class VendorController extends Controller
     {
         $vendor = Vendor::where('vendor_id', $id)->first();
         $user = User::where('user_id', $vendor->user_id)->first();
-        $image = Image::where('images_id', $vendor->profile_image)->first();
+        $image = Image::where('image_id', $vendor->profile_image)->first();
 
 
 
         $idd = $vendor->profile_image;
         if ($request->hasFile('file')) {
-            $idd = app('App\Http\Controllers\ImagesController')->store($request)['images_id'];
+            $idd = app('App\Http\Controllers\ImagesController')->store($request)['image_id'];
             if ($image)
                 app('App\Http\Controllers\ImagesController')->destroy($image->filename);
         }

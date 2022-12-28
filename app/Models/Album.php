@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Album extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'image_id';
-    protected $fillable = [
-        'original_filename',
-        'filename',
-    ];
+
+    public function imagable()
+    {
+        return $this->morphTo();
+    }
 }

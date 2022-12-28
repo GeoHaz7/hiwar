@@ -20,6 +20,11 @@ class Page extends Model
 
     public function thumbnail()
     {
-        return $this->hasOne(Image::class, 'images_id', 'feature_image');
+        return $this->hasOne(Image::class, 'image_id', 'feature_image');
+    }
+
+    public function album()
+    {
+        return $this->morphMany(Album::class, 'imagable');
     }
 }

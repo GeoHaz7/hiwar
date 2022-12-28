@@ -17,7 +17,7 @@ class PagesController extends Controller
     public function index()
     {
 
-        $page = Page::select('page_id', 'title', 'brief', 'description', 'filename', 'status')->leftjoin('images', 'images.images_id', '=', 'pages.feature_image');;
+        $page = Page::select('page_id', 'title', 'brief', 'description', 'filename', 'status')->leftjoin('images', 'images.image_id', '=', 'pages.feature_image');;
 
 
         return DataTables::eloquent($page)
@@ -44,7 +44,7 @@ class PagesController extends Controller
     {
 
         if ($request->hasFile('file')) {
-            $id = app('App\Http\Controllers\ImagesController')->store($request)['images_id'];
+            $id = app('App\Http\Controllers\ImagesController')->store($request)['image_id'];
             // return $id;
         }
         Page::create([
@@ -93,13 +93,13 @@ class PagesController extends Controller
     public function update(Request $request, $id)
     {
         $page = Page::where('page_id', $id)->first();
-        $image = Image::where('images_id', $page->feature_image)->first();
+        $image = Image::where('image_id', $page->feature_image)->first();
 
 
 
         $idd = $page->feature_image;
         if ($request->hasFile('file')) {
-            $idd = app('App\Http\Controllers\ImagesController')->store($request)['images_id'];
+            $idd = app('App\Http\Controllers\ImagesController')->store($request)['image_id'];
             if ($image)
                 app('App\Http\Controllers\ImagesController')->destroy($image->filename);
         }

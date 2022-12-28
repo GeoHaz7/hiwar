@@ -34,6 +34,6 @@ class Vendor extends Model
 
     public function thumbnail()
     {
-        return $this->hasOne(Image::class, 'images_id', 'profile_image');
+        return $this->hasOne(Image::class, 'image_id', 'profile_image');
     }
 }

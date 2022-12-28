@@ -51,7 +51,7 @@
                         <a href="#">
                             <i class="fa fa-tachometer-alt"></i>
                             <span>Vendors</span>
-                            <span class="badge badge-pill badge-warning">New</span>
+                            {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
@@ -74,7 +74,7 @@
                         <a href="#">
                             <i class="fa fa-tachometer-alt"></i>
                             <span>Pages</span>
-                            <span class="badge badge-pill badge-warning">New</span>
+                            {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
@@ -95,25 +95,23 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="far fa-gem"></i>
-                            <span>Components</span>
+                            <i class="fa fa-tachometer-alt"></i>
+                            <span>Products</span>
+                            {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
                                 <li>
-                                    <a href="#">General</a>
+                                    <a href="{{ route('product.list') }}">All Products
+                                        {{-- <span
+                                         class="badge badge-pill badge-success"
+                                         >Pro</span> --}}
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#">Panels</a>
-                                </li>
-                                <li>
-                                    <a href="#">Tables</a>
-                                </li>
-                                <li>
-                                    <a href="#">Icons</a>
-                                </li>
-                                <li>
-                                    <a href="#">Forms</a>
+                                    <a href="{{ route('product.create') }}">Add Product
+                                        {{-- <span class="badge badge-pill badge-success">Pro</span> --}}
+                                    </a>
                                 </li>
                             </ul>
                         </div>

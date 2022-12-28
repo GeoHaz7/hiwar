@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ImagesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImagesController;
+use App\Http\Controllers\Select2Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,8 +40,22 @@ Route::get('/page/edit/{id}', [App\Http\Controllers\PagesController::class, 'edi
 Route::post('/page/update/{id}', [App\Http\Controllers\PagesController::class, 'update'])->name('page.update');
 Route::delete('/page/destroy/{id}', [App\Http\Controllers\PagesController::class, 'destroy'])->name('page.destroy');
 
+Route::get('/product/data', [App\Http\Controllers\ProductController::class, 'index'])->name('product.data');
+Route::get('/product', [App\Http\Controllers\ProductController::class, 'show'])->name('product.list');
+Route::get('/product/create', [App\Http\Controllers\ProductController::class, 'create'])->name('product.create');
+Route::post('/product/store', [App\Http\Controllers\ProductController::class, 'store'])->name('product.store');
+Route::get('/product/edit/{id}', [App\Http\Controllers\ProductController::class, 'edit'])->name('product.edit');
+Route::post('/product/update/{id}', [App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
+Route::delete('/product/destroy/{id}', [App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
+
 
 //image routes
 Route::get('image/show', [ImagesController::class, 'show'])->name('image.show');
 Route::post('image/store', [ImagesController::class, 'store'])->name('image.store');
 Route::post('image/delete', [ImagesController::class, 'delete'])->name('image.delete');
+
+//get categories Data Ajax
+Route::get('/vendors/ajax/', [Select2Controller::class, 'vendorDataAjax'])->name('vendors.dataAjax');
+
+//show categories Data Ajax
+Route::get('/vendors/ajax/show/{id}', [Select2Controller::class, 'showVendorDataAjax'])->name('vendors.showDataAjax');

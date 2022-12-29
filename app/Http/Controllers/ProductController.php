@@ -151,4 +151,18 @@ class ProductController extends Controller
 
         return response()->json('success');
     }
+
+    public function switch(Request $request, Product $product, $id)
+    {
+
+        // dd($request->all());
+
+        $product = Product::where('product_id', $id)->first();
+
+        $product->update([
+            'status' => !$product->status,
+        ]);
+
+        return response()->json('success');
+    }
 }

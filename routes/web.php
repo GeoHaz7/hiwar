@@ -44,6 +44,7 @@ Route::get('/product/data', [App\Http\Controllers\ProductController::class, 'ind
 Route::get('/product', [App\Http\Controllers\ProductController::class, 'show'])->name('product.list');
 Route::get('/product/create', [App\Http\Controllers\ProductController::class, 'create'])->name('product.create');
 Route::post('/product/store', [App\Http\Controllers\ProductController::class, 'store'])->name('product.store');
+Route::post('/product/switch/{id}', [App\Http\Controllers\ProductController::class, 'switch'])->name('product.switch');
 Route::get('/product/edit/{id}', [App\Http\Controllers\ProductController::class, 'edit'])->name('product.edit');
 Route::post('/product/update/{id}', [App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
 Route::delete('/product/destroy/{id}', [App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');

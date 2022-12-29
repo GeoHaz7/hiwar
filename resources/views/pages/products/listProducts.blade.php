@@ -99,8 +99,20 @@
                             '_token': '{{ csrf_token() }}'
                         },
                         success: function(response) {
-                            table.ajax.reload(null);
-                            if (response == 'success') {}
+                            if (response == 'success') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: response,
+                                    showDenyButton: false,
+                                    showCancelButton: false,
+                                    confirmButtonText: 'Yes'
+                                }).then((result) => {
+                                    if (response == 'success') {
+                                        table.ajax.reload(null);
+
+                                    }
+                                });
+                            }
                         },
                         error: function(err) {}
                     });

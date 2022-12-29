@@ -151,4 +151,15 @@ class PagesController extends Controller
 
         return response()->json('success');
     }
+
+    public function switch(Page $page, $id)
+    {
+        $page = Page::where('page_id', $id)->first();
+
+        $page->update([
+            'status' => !$page->status,
+        ]);
+
+        return response()->json('success');
+    }
 }

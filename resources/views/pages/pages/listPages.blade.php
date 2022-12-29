@@ -47,7 +47,15 @@
                         "data": "brief"
                     },
                     {
-                        "data": "status"
+                        "data": "status",
+                        render: function(data, type, row, meta) {
+                            var checked = (data) ? "checked" : "";
+                            return '<div class="form-switch"><input data-id="' +
+                                row.page_id +
+                                '" class="form-check-input" type="checkbox" role="switch" id="statusSwitch" ' +
+                                checked + '></div>';
+
+                        }
                     },
                     {
                         "data": "page_id",
@@ -62,6 +70,46 @@
                     }
                 ]
             });
+
+            //switch status
+            $('#example').on('change', '#statusSwitch', function(e) {
+                var id = $(this).data('id');
+                var url = "{{ route('page.switch', ':id') }}";
+                url = url.replace(':id', id);
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Are you sure ?',
+                    showDenyButton: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        data: {
+                            '_token': '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response == 'success') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: response,
+                                    showDenyButton: false,
+                                    showCancelButton: false,
+                                    confirmButtonText: 'Yes'
+                                }).then((result) => {
+                                    if (response == 'success') {
+                                        table.ajax.reload(null);
+
+                                    }
+                                });
+                            }
+                        },
+                        error: function(err) {}
+                    });
+                });
+            });
+
             // Delete a record
             $('#example').on('click', '.editor-delete', function(e) {
                 e.preventDefault();

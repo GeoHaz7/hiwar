@@ -158,4 +158,15 @@ class VendorController extends Controller
 
         return response()->json('success');
     }
+
+    public function switch(Vendor $vendor, $id)
+    {
+        $vendor = Vendor::where('vendor_id', $id)->first();
+
+        $vendor->update([
+            'status' => !$vendor->status,
+        ]);
+
+        return response()->json('success');
+    }
 }

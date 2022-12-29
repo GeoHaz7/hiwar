@@ -25,9 +25,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/vendor/data', [App\Http\Controllers\VendorController::class, 'index'])->name('vendor.data');
-Route::get('/vendor', [App\Http\Controllers\VendorController::class, 'show'])->name('vendor.list');
+Route::get('/vendors', [App\Http\Controllers\VendorController::class, 'show'])->name('vendor.list');
 Route::get('/vendor/create', [App\Http\Controllers\VendorController::class, 'create'])->name('vendor.create');
 Route::post('/vendor/store', [App\Http\Controllers\VendorController::class, 'store'])->name('vendor.store');
+Route::post('/vendor/switch/{id}', [App\Http\Controllers\VendorController::class, 'switch'])->name('vendor.switch');
 Route::get('/vendor/edit/{id}', [App\Http\Controllers\VendorController::class, 'edit'])->name('vendor.edit');
 Route::post('/vendor/update/{id}', [App\Http\Controllers\VendorController::class, 'update'])->name('vendor.update');
 Route::delete('/vendor/destroy/{id}', [App\Http\Controllers\VendorController::class, 'destroy'])->name('vendor.destroy');
@@ -36,6 +37,7 @@ Route::get('/page/data', [App\Http\Controllers\PagesController::class, 'index'])
 Route::get('/page', [App\Http\Controllers\PagesController::class, 'show'])->name('page.list');
 Route::get('/page/create', [App\Http\Controllers\PagesController::class, 'create'])->name('page.create');
 Route::post('/page/store', [App\Http\Controllers\PagesController::class, 'store'])->name('page.store');
+Route::post('/page/switch/{id}', [App\Http\Controllers\PagesController::class, 'switch'])->name('page.switch');
 Route::get('/page/edit/{id}', [App\Http\Controllers\PagesController::class, 'edit'])->name('page.edit');
 Route::post('/page/update/{id}', [App\Http\Controllers\PagesController::class, 'update'])->name('page.update');
 Route::delete('/page/destroy/{id}', [App\Http\Controllers\PagesController::class, 'destroy'])->name('page.destroy');
@@ -51,9 +53,9 @@ Route::delete('/product/destroy/{id}', [App\Http\Controllers\ProductController::
 
 
 //image routes
-Route::get('image/show/', [ImagesController::class, 'show'])->name('image.show');
-Route::post('image/store', [ImagesController::class, 'store'])->name('image.store');
-Route::post('image/delete', [ImagesController::class, 'delete'])->name('image.delete');
+Route::get('/image/show/', [ImagesController::class, 'show'])->name('image.show');
+Route::post('/image/store', [ImagesController::class, 'store'])->name('image.store');
+Route::post('/image/delete', [ImagesController::class, 'delete'])->name('image.delete');
 
 //get categories Data Ajax
 Route::get('/vendors/ajax/', [Select2Controller::class, 'vendorDataAjax'])->name('vendors.dataAjax');

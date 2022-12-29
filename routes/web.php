@@ -50,7 +50,7 @@ Route::delete('/product/destroy/{id}', [App\Http\Controllers\ProductController::
 
 
 //image routes
-Route::get('image/show', [ImagesController::class, 'show'])->name('image.show');
+Route::get('image/show/', [ImagesController::class, 'show'])->name('image.show');
 Route::post('image/store', [ImagesController::class, 'store'])->name('image.store');
 Route::post('image/delete', [ImagesController::class, 'delete'])->name('image.delete');
 

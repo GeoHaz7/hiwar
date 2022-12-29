@@ -8894,7 +8894,7 @@
                             );
                         return e.dropzone;
                     }),
-                    (b.autoDiscover = !0),
+                    (b.autoDiscover = false),
                     (b.discover = function () {
                         var e;
                         if (document.querySelectorAll)

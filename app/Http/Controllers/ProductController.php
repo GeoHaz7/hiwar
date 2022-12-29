@@ -17,7 +17,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::select('product_id', 'name', 'price', 'vendor', 'filename', 'status')->leftjoin('images', 'images.image_id', '=', 'pages.feature_image');;
+        $product = Product::select('product_id', 'name', 'price', 'vendor_id', 'filename', 'status')
+            ->leftjoin('images', 'images.image_id', '=', 'products.feature_image');
+
 
 
         return DataTables::eloquent($product)
@@ -86,10 +88,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product, $id)
     {
-        $product = Product::where('product', $id)->first();
+        $product = Product::where('product_id', $id)->first();
 
 
-        return view('pages.pages.editPage', ['product' => $product]);
+        return view('pages.products.editProduct', ['product' => $product]);
     }
 
     /**

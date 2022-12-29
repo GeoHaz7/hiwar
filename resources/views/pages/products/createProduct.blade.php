@@ -194,9 +194,11 @@
                         maxlength: 255
 
                     },
-                    status: {
+                    description: {
                         required: true,
-                    }
+                        maxlength: 255
+
+                    },
                 },
                 errorElement: "div",
                 errorPlacement: function(error, element) {

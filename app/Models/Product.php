@@ -10,6 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $primaryKey = 'product_id';
+    protected $appends = ['vendorName'];
     protected $fillable = [
         'name',
         'description',
@@ -27,5 +28,16 @@ class Product extends Model
     public function album()
     {
         return $this->morphMany(Album::class, 'imagable');
+    }
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id', 'vendor_id');
+    }
+
+    public function getVendorNameAttribute()
+    {
+
+        return $this->vendor->full_name;
     }
 }

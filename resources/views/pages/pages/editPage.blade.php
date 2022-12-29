@@ -3,7 +3,7 @@
 @section('content')
     <div class="container col-10 py-3">
         <div>
-            <h2 class="card-title mt-3 text-center ">Add A Page</h2>
+            <h2 class="card-title mt-3 text-center ">Edit Page</h2>
             {{-- <p class="text-center">Get started with your free account</p> --}}
 
             <form id="pageForm" class="mt-5 ">
@@ -58,6 +58,8 @@
 @section('js')
     <script type="text/javascript">
         var array = [];
+        127.0 .0 .1 / products ? id = 45
+        127.0 .0 .1 / products
         Dropzone.autoDiscover = false;
         $('#myDropzone').dropzone({
             maxFiles: 5,
@@ -74,7 +76,7 @@
                 // Get images
                 var myDropzone = this;
                 $.ajax({
-                    url: "{{ route('image.show') }}?id={{ $page->page_id }}",
+                    url: "{{ route('image.show') }}?id={{ $page->page_id }}&type=page",
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {

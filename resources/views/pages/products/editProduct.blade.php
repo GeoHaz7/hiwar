@@ -3,15 +3,15 @@
 @section('content')
     <div class="container col-10 py-3">
         <div>
-            <h2 class="card-title mt-3 text-center ">Add A Page</h2>
+            <h2 class="card-title mt-3 text-center ">Edit A Product</h2>
             {{-- <p class="text-center">Get started with your free account</p> --}}
 
-            <form id="pageForm" class="mt-5 ">
+            <form id="productForm" class="mt-5 ">
                 <div class="center mb-3">
                     <div class="form-input">
                         <div class="preview">
                             <img class="mx-auto mb-3 d-block" id="file-ip-1-preview"
-                                src="{{ $page->thumbnail ? url('uploads/gallery') . '/' . $page->thumbnail->filename : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png' }}">
+                                src="{{ $product->thumbnail ? url('uploads/gallery') . '/' . $product->thumbnail->filename : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png' }}">
 
 
                         </div>
@@ -20,30 +20,31 @@
                         <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
                     </div>
                 </div>
+
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-star"></i> </span>
                     </div>
-                    <input id="pageTitle" name="pageTitle" class="form-control" value="{{ $page->title }}"
-                        placeholder="Title" type="text">
+                    <input id="productName" name="productName" value="{{ $product->name }}" class="form-control"
+                        placeholder="Name" type="text">
                 </div> <!-- form-group// -->
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-briefcase"></i> </span>
+                        <span class="input-group-text"> <i class="fa fa-dollar"></i> </span>
                     </div>
-                    <input id="pageBrief" name="pageBrief" value="{{ $page->brief }}" class="form-control"
-                        placeholder="Brief name" type="text">
+                    <input id="productPrice" name="productPrice" value="{{ $product->price }}" class="form-control"
+                        placeholder="Price" type="number">
                 </div> <!-- form-group// -->
 
                 <div class="col-12 p-0">
                     <select class="livesearch form-control" style="width: 100%" name="livesearch"></select>
                 </div>
-
                 <div class="mt-3">
-                    <textarea class="ckeditor" type="text" class="form-control" id="productDescription" name="productDescription"></textarea>
+                    <textarea class="ckeditor" type="text" class="form-control" id="productDescription" name="productDescription">{!! $product->description !!}</textarea>
                 </div>
-                <div class="dropzone mt-3" id="myDropzone">
+
+                <div class="dropzone mt-3" id="dropzone">
 
                     <div class="dz-default dz-message">
                         <h4>Drop Files Here</h4>
@@ -51,7 +52,7 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <button type="submit" class="btn btn-primary btn-block"> Edit Page </button>
+                    <button type="submit" class="btn btn-primary btn-block"> Create Product </button>
                 </div> <!-- form-group// -->
                 {{-- <p class="text-center">Have an account? <a href="">Log In</a> </p> --}}
             </form>
@@ -63,7 +64,7 @@
     <script type="text/javascript">
         var array = [];
         Dropzone.autoDiscover = false;
-        $('#myDropzone').dropzone({
+        $('#dropzone').dropzone({
             maxFiles: 5,
             url: "{{ route('image.store') }}",
             method: 'post',
@@ -78,7 +79,7 @@
                 // Get images
                 var myDropzone = this;
                 $.ajax({
-                    url: "{{ route('image.show') }}?id={{ $page->page_id }}",
+                    url: "{{ route('image.show') }}?id={{ $product->product_id }}&type=product",
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -157,6 +158,48 @@
 
         $(document).ready(function() {
 
+            $('.livesearch').select2({
+                placeholder: 'Select an item',
+                allowClear: true,
+                ajax: {
+                    url: '{{ route('vendors.dataAjax') }}',
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data, function(item) {
+                                return {
+                                    text: item.full_name,
+                                    id: item.vendor_id
+                                }
+                            })
+                        };
+                    },
+                }
+            });
+
+            // Fetch the preselected item, and add to the control
+            var vendorSelect = $('.livesearch');
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('vendors.showDataAjax', ['id' => $product->vendor_id]) }}'
+            }).then(function(data) {
+                // create the option and append to Select2
+                var option = new Option(data[0].full_name, data[0].vendor_id, true, true);
+
+                vendorSelect.append(option).trigger('change');
+
+                // manually trigger the `select2:select` event
+                studentSelect.trigger({
+                    type: 'select2:select',
+                    params: {
+                        data: data
+                    }
+                });
+            });
+
+
+
             document.getElementById('file-ip-1').addEventListener('change', function showPreview(event) {
                 if (event.target.files.length > 0) {
                     var src = URL.createObjectURL(event.target.files[0]);
@@ -168,19 +211,21 @@
             });
 
 
-            $('#pageForm').validate({
+            $('#productForm').validate({
                 rules: {
-                    title: {
+                    name: {
                         required: true,
                     },
-                    brief: {
+                    price: {
                         required: true,
                         maxlength: 255
 
                     },
-                    status: {
+                    description: {
                         required: true,
-                    }
+                        maxlength: 255
+
+                    },
                 },
                 errorElement: "div",
                 errorPlacement: function(error, element) {
@@ -188,15 +233,16 @@
                 },
                 submitHandler: function(form) {
                     var fd = new FormData();
-                    fd.append('pageTitle', $('#pageTitle').val());
-                    fd.append('pageBrief', $('#pageBrief').val());
-                    fd.append('pageDescription', CKEDITOR.instances['pageDescription'].getData());
+                    fd.append('productName', $('#productName').val());
+                    fd.append('productPrice', $('#productPrice').val());
+                    fd.append('productDescription', CKEDITOR.instances['productDescription'].getData());
+                    fd.append('vendor_id', $('.livesearch').select2('data')[0].id);
                     fd.append('file', $('#file-ip-1')[0].files[0]);
                     fd.append('image_array', array);
                     fd.append('_token', '{{ csrf_token() }}');
 
                     $.ajax({
-                        url: "{{ route('page.update', ['id' => $page->page_id]) }}",
+                        url: "{{ route('product.update', ['id' => $product->product_id]) }}",
                         type: "POST",
                         processData: false,
                         contentType: false,
@@ -210,7 +256,7 @@
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
                                 if (response == 'success') {
-                                    window.location = '/page';
+                                    window.location = '/product';
 
                                 }
                             });

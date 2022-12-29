@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use App\Models\Image;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ImagesController extends Controller
@@ -64,10 +65,23 @@ class ImagesController extends Controller
      */
     public function show(Request $request, Image $images)
     {
-        $id = $request->id;
-        if ($id) {
-            $images = Page::find($id)->album;
+
+
+        switch ($request->type) {
+            case ('page'):
+                $images = Page::find($request->id)->album;
+                break;
+
+            case ('product'):
+                $images = Product::find($request->id)->album;
+                break;
+
+            default:
+                return null;
         }
+        // $images = Page::find($request->id)->album;
+
+
         foreach ($images as $image) {
             $image = $image->images;
             $obj['name'] =  $image->filename;

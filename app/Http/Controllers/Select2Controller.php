@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 
@@ -22,15 +23,8 @@ class Select2Controller extends Controller
 
     public function showVendorDataAjax(Request $request, $id)
     {
-        $data = [];
+        $vendor = Vendor::select('full_name', 'vendor_id')->where('vendor_id', $id)->get();
 
-        if ($id) {
-            $vendor = Vendor::findorfail($id);
-
-            $vendorArray = $vendor->pluck('vendor_id')->toarray();
-
-            $data = Vendor::select("vendor_id", 'full_name')->whereIn("vendor_id",  $vendorArray)->get();
-        }
-        return response()->json($data);
+        return response()->json($vendor);
     }
 }

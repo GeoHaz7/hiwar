@@ -3,12 +3,13 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\News;
 use App\Models\Page;
 use App\Models\User;
 use App\Models\Image;
-use App\Models\Product;
-use App\Models\Vendor;
 use App\Models\Video;
+use App\Models\Vendor;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -52,6 +53,7 @@ class DatabaseSeeder extends Seeder
 
         Vendor::factory(4)->create();
         Page::factory(4)->create();
+        News::factory(4)->create();
         Image::factory(4)->create();
         Product::factory(4)->create();
 

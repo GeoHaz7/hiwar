@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use App\Models\Image;
+use App\Models\News;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -74,6 +75,10 @@ class ImagesController extends Controller
 
             case ('product'):
                 $images = Product::find($request->id)->album;
+                break;
+
+            case ('news'):
+                $images = News::find($request->id)->album;
                 break;
 
             default:

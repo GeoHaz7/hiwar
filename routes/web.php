@@ -52,6 +52,16 @@ Route::get('/product/edit/{id}', [App\Http\Controllers\ProductController::class,
 Route::post('/product/update/{id}', [App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
 Route::delete('/product/destroy/{id}', [App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
 
+Route::get('/news/data', [App\Http\Controllers\NewsController::class, 'index'])->name('news.data');
+Route::get('/news', [App\Http\Controllers\NewsController::class, 'show'])->name('news.list');
+Route::get('/news/create', [App\Http\Controllers\NewsController::class, 'create'])->name('news.create');
+Route::post('/news/store', [App\Http\Controllers\NewsController::class, 'store'])->name('news.store');
+Route::post('/news/switch/{id}', [App\Http\Controllers\NewsController::class, 'switch'])->name('news.switch');
+Route::get('/news/edit/{id}', [App\Http\Controllers\NewsController::class, 'edit'])->name('news.edit');
+Route::post('/news/update/{id}', [App\Http\Controllers\NewsController::class, 'update'])->name('news.update');
+Route::delete('/news/destroy/{id}', [App\Http\Controllers\NewsController::class, 'destroy'])->name('news.destroy');
+
+
 Route::get('/video/data', [App\Http\Controllers\VideoController::class, 'index'])->name('video.data');
 Route::get('/video', [App\Http\Controllers\VideoController::class, 'show'])->name('video.list');
 Route::post('/video/store', [App\Http\Controllers\VideoController::class, 'store'])->name('video.store');

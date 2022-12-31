@@ -49,7 +49,7 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="fa fa-tachometer-alt"></i>
+                            <i class="fa fa-person"></i>
                             <span>Vendors</span>
                             {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
@@ -72,7 +72,7 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="fa fa-tachometer-alt"></i>
+                            <i class="fa fa-scroll"></i>
                             <span>Pages</span>
                             {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
@@ -95,7 +95,7 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="fa fa-tachometer-alt"></i>
+                            <i class="fa fa-box"></i>
                             <span>Products</span>
                             {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
@@ -118,22 +118,23 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="fa fa-chart-line"></i>
-                            <span>Charts</span>
+                            <i class="far fa-newspaper"></i>
+                            <span>News</span>
+                            {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
                                 <li>
-                                    <a href="#">Pie chart</a>
+                                    <a href="{{ route('news.list') }}">All News
+                                        {{-- <span
+                                         class="badge badge-pill badge-success"
+                                         >Pro</span> --}}
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#">Line chart</a>
-                                </li>
-                                <li>
-                                    <a href="#">Bar chart</a>
-                                </li>
-                                <li>
-                                    <a href="#">Histogram</a>
+                                    <a href="{{ route('news.create') }}">Add News
+                                        {{-- <span class="badge badge-pill badge-success">Pro</span> --}}
+                                    </a>
                                 </li>
                             </ul>
                         </div>

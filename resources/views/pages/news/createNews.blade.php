@@ -3,17 +3,14 @@
 @section('content')
     <div class="container col-10 py-3">
         <div>
-            <h2 class="card-title mt-3 text-center ">Edit Page</h2>
+            <h2 class="card-title mt-3 text-center ">Add A News</h2>
             {{-- <p class="text-center">Get started with your free account</p> --}}
 
-            <form id="pageForm" class="mt-5 ">
+            <form id="newsForm" class="mt-5 ">
                 <div class="center mb-3">
                     <div class="form-input">
                         <div class="preview">
-                            <img class="mx-auto mb-3 d-block" id="file-ip-1-preview"
-                                src="{{ $page->thumbnail ? url('uploads/gallery') . '/' . $page->thumbnail->filename : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png' }}">
-
-
+                            <img class="mx-auto mb-3" id="file-ip-1-preview">
                         </div>
 
                         <label for="file-ip-1">Upload Image</label>
@@ -24,20 +21,26 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-star"></i> </span>
                     </div>
-                    <input id="pageTitle" name="pageTitle" class="form-control" value="{{ $page->title }}"
-                        placeholder="Title" type="text">
+                    <input id="newsTitle" name="newsTitle" class="form-control" placeholder="Title" type="text">
+                </div> <!-- form-group// -->
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-star"></i> </span>
+                    </div>
+                    <input id="newsCategory" name="newsCategory" class="form-control" placeholder="Category" type="text">
                 </div> <!-- form-group// -->
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-briefcase"></i> </span>
                     </div>
-                    <input id="pageBrief" name="pageBrief" value="{{ $page->brief }}" class="form-control"
-                        placeholder="Brief name" type="text">
+                    <input id="newsBrief" name="newsBrief" class="form-control" placeholder="Brief name" type="text">
                 </div> <!-- form-group// -->
 
 
-                <textarea class="ckeditor" type="text" class="form-control" id="pageDescription" name="pageDescription">{!! $page->description !!}</textarea>
+                <textarea class="ckeditor" type="text" class="form-control" id="newsDescription" name="newsDescription"></textarea>
+
 
                 <div class="dropzone mt-3" id="myDropzone">
 
@@ -47,7 +50,7 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <button type="submit" class="btn btn-primary btn-block"> Edit Page </button>
+                    <button type="submit" class="btn btn-primary btn-block"> Create News </button>
                 </div> <!-- form-group// -->
                 {{-- <p class="text-center">Have an account? <a href="">Log In</a> </p> --}}
             </form>
@@ -74,7 +77,7 @@
                 // Get images
                 var myDropzone = this;
                 $.ajax({
-                    url: "{{ route('image.show') }}?id={{ $page->page_id }}&type=page",
+                    url: "",
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -87,7 +90,6 @@
                             myDropzone.options.addedfile.call(myDropzone, file);
                             myDropzone.options.thumbnail.call(myDropzone, file,
                                 value.path);
-
                             myDropzone.emit("complete", file);
                         });
                     }
@@ -150,8 +152,8 @@
             }
 
         });
-
         $(document).ready(function() {
+
 
             document.getElementById('file-ip-1').addEventListener('change', function showPreview(event) {
                 if (event.target.files.length > 0) {
@@ -164,7 +166,7 @@
             });
 
 
-            $('#pageForm').validate({
+            $('#newsForm').validate({
                 rules: {
                     title: {
                         required: true,
@@ -184,15 +186,16 @@
                 },
                 submitHandler: function(form) {
                     var fd = new FormData();
-                    fd.append('pageTitle', $('#pageTitle').val());
-                    fd.append('pageBrief', $('#pageBrief').val());
-                    fd.append('pageDescription', CKEDITOR.instances['pageDescription'].getData());
+                    fd.append('newsTitle', $('#newsTitle').val());
+                    fd.append('newsCategory', $('#newsCategory').val());
+                    fd.append('newsBrief', $('#newsBrief').val());
+                    fd.append('newsDescription', CKEDITOR.instances['newsDescription'].getData());
                     fd.append('file', $('#file-ip-1')[0].files[0]);
                     fd.append('image_array', array);
                     fd.append('_token', '{{ csrf_token() }}');
 
                     $.ajax({
-                        url: "{{ route('page.update', ['id' => $page->page_id]) }}",
+                        url: "{{ route('news.store') }}",
                         type: "POST",
                         processData: false,
                         contentType: false,
@@ -206,7 +209,7 @@
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
                                 if (response == 'success') {
-                                    window.location = '/page';
+                                    window.location = '/news';
 
                                 }
                             });

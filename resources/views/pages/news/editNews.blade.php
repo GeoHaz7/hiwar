@@ -3,15 +3,15 @@
 @section('content')
     <div class="container col-10 py-3">
         <div>
-            <h2 class="card-title mt-3 text-center ">Edit Page</h2>
+            <h2 class="card-title mt-3 text-center ">Edit News</h2>
             {{-- <p class="text-center">Get started with your free account</p> --}}
 
-            <form id="pageForm" class="mt-5 ">
+            <form id="newsForm" class="mt-5 ">
                 <div class="center mb-3">
                     <div class="form-input">
                         <div class="preview">
                             <img class="mx-auto mb-3 d-block" id="file-ip-1-preview"
-                                src="{{ $page->thumbnail ? url('uploads/gallery') . '/' . $page->thumbnail->filename : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png' }}">
+                                src="{{ $news->thumbnail ? url('uploads/gallery') . '/' . $news->thumbnail->filename : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png' }}">
 
 
                         </div>
@@ -24,20 +24,28 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-star"></i> </span>
                     </div>
-                    <input id="pageTitle" name="pageTitle" class="form-control" value="{{ $page->title }}"
+                    <input id="newsTitle" name="newsTitle" class="form-control" value="{{ $news->title }}"
                         placeholder="Title" type="text">
+                </div> <!-- form-group// -->
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-star"></i> </span>
+                    </div>
+                    <input id="newsCategory" name="newsCategory" class="form-control" value="{{ $news->category }}"
+                        placeholder="Category" type="text">
                 </div> <!-- form-group// -->
 
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-briefcase"></i> </span>
                     </div>
-                    <input id="pageBrief" name="pageBrief" value="{{ $page->brief }}" class="form-control"
+                    <input id="newsBrief" name="newsBrief" value="{{ $news->brief }}" class="form-control"
                         placeholder="Brief name" type="text">
                 </div> <!-- form-group// -->
 
 
-                <textarea class="ckeditor" type="text" class="form-control" id="pageDescription" name="pageDescription">{!! $page->description !!}</textarea>
+                <textarea class="ckeditor" type="text" class="form-control" id="newsDescription" name="newsDescription">{!! $news->description !!}</textarea>
 
                 <div class="dropzone mt-3" id="myDropzone">
 
@@ -47,7 +55,7 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <button type="submit" class="btn btn-primary btn-block"> Edit Page </button>
+                    <button type="submit" class="btn btn-primary btn-block"> Edit News </button>
                 </div> <!-- form-group// -->
                 {{-- <p class="text-center">Have an account? <a href="">Log In</a> </p> --}}
             </form>
@@ -74,7 +82,7 @@
                 // Get images
                 var myDropzone = this;
                 $.ajax({
-                    url: "{{ route('image.show') }}?id={{ $page->page_id }}&type=page",
+                    url: "{{ route('image.show') }}?id={{ $news->news_id }}&type=news",
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -164,7 +172,7 @@
             });
 
 
-            $('#pageForm').validate({
+            $('#newsForm').validate({
                 rules: {
                     title: {
                         required: true,
@@ -184,15 +192,16 @@
                 },
                 submitHandler: function(form) {
                     var fd = new FormData();
-                    fd.append('pageTitle', $('#pageTitle').val());
-                    fd.append('pageBrief', $('#pageBrief').val());
-                    fd.append('pageDescription', CKEDITOR.instances['pageDescription'].getData());
+                    fd.append('newsTitle', $('#newsTitle').val());
+                    fd.append('newsCategory', $('#newsCategory').val());
+                    fd.append('newsBrief', $('#newsBrief').val());
+                    fd.append('newsDescription', CKEDITOR.instances['newsDescription'].getData());
                     fd.append('file', $('#file-ip-1')[0].files[0]);
                     fd.append('image_array', array);
                     fd.append('_token', '{{ csrf_token() }}');
 
                     $.ajax({
-                        url: "{{ route('page.update', ['id' => $page->page_id]) }}",
+                        url: "{{ route('news.update', ['id' => $news->news_id]) }}",
                         type: "POST",
                         processData: false,
                         contentType: false,
@@ -206,7 +215,7 @@
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
                                 if (response == 'success') {
-                                    window.location = '/page';
+                                    window.location = '/news';
 
                                 }
                             });

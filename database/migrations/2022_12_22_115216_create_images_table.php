@@ -17,6 +17,8 @@ return new class extends Migration
             $table->increments('image_id');
             $table->string('original_filename');
             $table->string('filename');
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

@@ -19,9 +19,11 @@ return new class extends Migration
             $table->text('description');
             $table->integer('price');
             $table->unsignedInteger('vendor_id');
-            $table->foreign('vendor_id')->references('vendor_id')->on('vendors')->onDelete('cascade');
+            $table->foreign('vendor_id')->references('vendor_id')->on('vendors');
             $table->boolean('status');
-            $table->string('feature_image')->nullable();
+            $table->unsignedInteger('feature_image')->nullable();
+            $table->foreign('feature_image')->references('image_id')->on('images');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

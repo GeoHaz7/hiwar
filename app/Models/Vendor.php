@@ -14,7 +14,7 @@ class Vendor extends Model
         CascadeSoftDeletes;
 
     protected $primaryKey = 'vendor_id';
-    protected $cascadeDeletes = ['user'];
+    protected $cascadeDeletes = ['user', 'products'];
     protected $fillable = [
         'full_name',
         'bio',
@@ -35,5 +35,10 @@ class Vendor extends Model
     public function thumbnail()
     {
         return $this->hasOne(Image::class, 'image_id', 'profile_image');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'vendor_id');
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Album;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
@@ -44,6 +45,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
         if ($request->hasFile('file')) {
             $id = app('App\Http\Controllers\ImagesController')->store($request)['image_id'];
             // return $id;
@@ -55,7 +57,7 @@ class ProductController extends Controller
             'price' => $request->productPrice,
             'status' => 1,
             'feature_image' => $id,
-            'vendor_id' => $request->vendor_id,
+            'vendor_id' => $request->has('vendor_id') ? $request->vendor_id : Auth::user()->vendor->vendor_id,
         ]);
 
         if ($request->image_array) {
@@ -90,6 +92,9 @@ class ProductController extends Controller
     {
         $product = Product::where('product_id', $id)->first();
 
+        if (Auth::user()->type == 2 && $product->vendor_id != Auth::user()->vendor->vendor_id)
+
+            return response()->json(['error' => 'Unauthorized.'], 401);
 
         return view('pages.products.editProduct', ['product' => $product]);
     }
@@ -104,8 +109,12 @@ class ProductController extends Controller
     public function update(Request $request, Product $product, $id)
     {
         $product = Product::where('product_id', $id)->first();
-        $image = Image::where('image_id', $product->feature_image)->first();
 
+        if (Auth::user()->type == 2 && $product->vendor_id != Auth::user()->vendor->vendor_id)
+
+            return response()->json(['error' => 'Unauthorized.'], 401);
+
+        $image = Image::where('image_id', $product->feature_image)->first();
 
 
         $idd = $product->feature_image;
@@ -146,8 +155,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product, $id)
     {
-        Product::where('product_id', $id)->first()->delete();
+        $product =  Product::where('product_id', $id)->first();
 
+        if (Auth::user()->type == 2 && $product->vendor_id != Auth::user()->vendor->vendor_id)
+
+            return response()->json(['error' => 'Unauthorized.'], 401);
+
+        $product->delete();
 
         return response()->json('success');
     }

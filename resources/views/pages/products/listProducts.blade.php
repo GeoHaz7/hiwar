@@ -70,6 +70,11 @@
                         "data": "product_id",
                         orderable: false,
                         render: function(data, type, row, meta) {
+                            if ({{ Auth::user()->type == 2 }} &&
+                                row.vendor_id != {{ Auth::user()->vendor->vendor_id }}
+                            )
+
+                                return null
                             return ('<i class="fa fa-edit text-primary" data-id="' +
                                 data +
                                 '"></i> <i class="fa fa-trash text-danger editor-delete" data-id="' +

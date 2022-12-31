@@ -32,9 +32,15 @@
                     <input id="productPrice" name="productPrice" class="form-control" placeholder="Price" type="number">
                 </div> <!-- form-group// -->
 
-                <div class="col-12 p-0">
-                    <select class="livesearch form-control" style="width: 100%" name="livesearch"></select>
-                </div>
+
+                @if (!Auth::user()->type == 2)
+                    <div class="col-12 p-0">
+                        <select class="livesearch form-control" style="width: 100%" name="livesearch"></select>
+                    </div>
+                @endif
+
+
+
                 <div class="mt-3">
                     <textarea class="ckeditor" type="text" class="form-control" id="productDescription" name="productDescription"></textarea>
                 </div>
@@ -209,7 +215,10 @@
                     fd.append('productName', $('#productName').val());
                     fd.append('productPrice', $('#productPrice').val());
                     fd.append('productDescription', CKEDITOR.instances['productDescription'].getData());
-                    fd.append('vendor_id', $('.livesearch').select2('data')[0].id);
+
+                    if ($('.livesearch').length != 0) {
+                        fd.append('vendor_id', $('.livesearch').select2('data')[0].id);
+                    }
                     fd.append('file', $('#file-ip-1')[0].files[0]);
                     fd.append('image_array', array);
                     fd.append('_token', '{{ csrf_token() }}');

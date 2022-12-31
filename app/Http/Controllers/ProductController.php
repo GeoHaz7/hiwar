@@ -45,6 +45,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $id = null;
 
         if ($request->hasFile('file')) {
             $id = app('App\Http\Controllers\ImagesController')->store($request)['image_id'];

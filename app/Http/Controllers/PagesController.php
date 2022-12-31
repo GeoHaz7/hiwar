@@ -44,6 +44,7 @@ class PagesController extends Controller
     public function store(Request $request)
     {
 
+        $id = null;
 
 
         if ($request->hasFile('file')) {

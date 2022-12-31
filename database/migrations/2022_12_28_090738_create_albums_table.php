@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('image_id');
             $table->foreign('image_id')->references('image_id')->on('images')->onDelete('cascade');
             $table->morphs('imagable');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

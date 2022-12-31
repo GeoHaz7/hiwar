@@ -2,12 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Album extends Model
 {
-    use HasFactory;
+    use HasFactory,
+        SoftDeletes,
+        CascadeSoftDeletes;
+
+    protected $primaryKey = 'album_id';
+    protected $cascadeDeletes = ['images'];
+
+    protected $fillable = [
+        'album_id',
+        'image_id',
+        'imagable_type',
+        'imagable_id',
+    ];
 
     public function imagable()
     {

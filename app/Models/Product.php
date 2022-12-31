@@ -14,7 +14,7 @@ class Product extends Model
         CascadeSoftDeletes;
     protected $primaryKey = 'product_id';
     protected $appends = ['vendorName'];
-    protected $cascadeDeletes = ['thumbnail'];
+    protected $cascadeDeletes = ['thumbnail', 'album'];
 
     protected $fillable = [
         'name',

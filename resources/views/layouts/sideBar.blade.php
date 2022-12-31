@@ -165,9 +165,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-calendar"></i>
-                            <span>Calendar</span>
+                        </a>
+
+                        <a href="{{ route('video.list') }}">
+                            <i class="fa fa-video"></i>
+                            <span>Videos</span>
                         </a>
                     </li>
                     <li>

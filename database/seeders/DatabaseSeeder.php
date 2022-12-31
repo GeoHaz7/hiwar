@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\Vendor;
+use App\Models\Video;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +20,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+
+        $name = [
+            'Do you hear the call?',
+            'Hero, you took everything from me',
+            'a playlist that makes you fight until your last breath',
+            'This could be the day i die for you'
+        ];
+
+        $link = [
+            'https://www.youtube.com/watch?v=yKve2Q52bX0',
+            'https://www.youtube.com/watch?v=IofeeSQ4T2I&t=112s',
+            'https://www.youtube.com/watch?v=PkCIiDVotlE&t=75s',
+            'https://www.youtube.com/watch?v=M7CTQ7OeqCg&t=651s'
+        ];
+
         // \App\Models\User::factory(10)->create();
 
 
@@ -37,6 +54,17 @@ class DatabaseSeeder extends Seeder
         Page::factory(4)->create();
         Image::factory(4)->create();
         Product::factory(4)->create();
+
+        for ($i = 0; $i < 4; $i++) {
+            $url = $link[$i];
+            parse_str(parse_url($url, PHP_URL_QUERY), $my_array_of_vars);
+
+            Video::create([
+                'name' => $name[$i],
+                'link' => $link[$i],
+                'linkShortcut' => $my_array_of_vars['v']
+            ]);
+        }
 
         // User::create([
         //     'nickname' => 'Oriana_Element',

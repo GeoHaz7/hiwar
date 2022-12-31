@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\Select2Controller;
 
@@ -50,6 +51,11 @@ Route::post('/product/switch/{id}', [App\Http\Controllers\ProductController::cla
 Route::get('/product/edit/{id}', [App\Http\Controllers\ProductController::class, 'edit'])->name('product.edit');
 Route::post('/product/update/{id}', [App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
 Route::delete('/product/destroy/{id}', [App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
+
+Route::get('/video/data', [App\Http\Controllers\VideoController::class, 'index'])->name('video.data');
+Route::get('/video', [App\Http\Controllers\VideoController::class, 'show'])->name('video.list');
+Route::post('/video/store', [App\Http\Controllers\VideoController::class, 'store'])->name('video.store');
+Route::delete('/video/destroy/{id}', [App\Http\Controllers\VideoController::class, 'destroy'])->name('video.destroy');
 
 
 //image routes

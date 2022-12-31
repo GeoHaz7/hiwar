@@ -17,7 +17,6 @@ class Album extends Model
     protected $cascadeDeletes = ['images'];
 
     protected $fillable = [
-        'album_id',
         'image_id',
         'imagable_type',
         'imagable_id',

@@ -7,7 +7,7 @@ use App\Models\News;
 use App\Models\Page;
 use App\Models\User;
 use App\Models\Image;
-use App\Models\Video;
+use App\Models\VideoAlbum;
 use App\Models\Vendor;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
             $url = $link[$i];
             parse_str(parse_url($url, PHP_URL_QUERY), $my_array_of_vars);
 
-            Video::create([
+            VideoAlbum::create([
                 'name' => $name[$i],
                 'link' => $link[$i],
                 'linkShortcut' => $my_array_of_vars['v']

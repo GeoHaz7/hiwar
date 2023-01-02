@@ -26,7 +26,7 @@
 
 
             var table = $('#example').DataTable({
-                "ajax": "{{ route('video.data') }}",
+                "ajax": "{{ route('videoAlbum.data') }}",
 
                 "columns": [{
                         "data": "name"
@@ -107,7 +107,7 @@
 
 
                     $.ajax({
-                        url: "{{ route('video.store') }}",
+                        url: "{{ route('videoAlbum.store') }}",
                         type: "POST",
                         processData: false,
                         contentType: false,
@@ -139,7 +139,7 @@
             $('#example').on('click', '.editor-delete', function(e) {
                 e.preventDefault();
                 var id = $(this).data('id');
-                var url = "{{ route('video.destroy', ':id') }}";
+                var url = "{{ route('videoAlbum.destroy', ':id') }}";
                 url = url.replace(':id', id);
                 Swal.fire({
                     icon: 'warning',

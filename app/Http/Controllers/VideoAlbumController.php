@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Video;
+use App\Models\VideoAlbum;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class VideoController extends Controller
+class VideoAlbumController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::select('video_id', 'name', 'link');
+        $videos = VideoAlbum::select('video_id', 'name', 'link');
 
         return DataTables::eloquent($videos)
             ->make(true);
@@ -43,7 +43,7 @@ class VideoController extends Controller
         parse_str(parse_url($url, PHP_URL_QUERY), $my_array_of_vars);
 
 
-        Video::create([
+        VideoAlbum::create([
             'name' => $request->videoName,
             'link' => $request->videoLink,
             'linkShortcut' => $my_array_of_vars['v'],
@@ -58,7 +58,7 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function show(Video $video)
+    public function show()
     {
         return view('pages.videos.listVideos');
     }
@@ -69,7 +69,7 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function edit(Video $video)
+    public function edit()
     {
         //
     }
@@ -81,7 +81,7 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Video $video)
+    public function update()
     {
         //
     }
@@ -92,9 +92,9 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video $video, $id)
+    public function destroy($id)
     {
-        Video::where('video_id', $id)->first()->delete();
+        VideoAlbum::where('video_id', $id)->first()->delete();
         return response()->json('success');
     }
 }

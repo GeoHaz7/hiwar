@@ -168,7 +168,7 @@
                     <li>
                         </a>
 
-                        <a href="{{ route('video.list') }}">
+                        <a href="{{ route('videoAlbum.list') }}">
                             <i class="fa fa-video"></i>
                             <span>Videos</span>
                         </a>

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VideoController;
+use App\Http\Controllers\VideoAlbumController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\Select2Controller;
 
@@ -62,10 +62,10 @@ Route::post('/news/update/{id}', [App\Http\Controllers\NewsController::class, 'u
 Route::delete('/news/destroy/{id}', [App\Http\Controllers\NewsController::class, 'destroy'])->name('news.destroy');
 
 
-Route::get('/video/data', [App\Http\Controllers\VideoController::class, 'index'])->name('video.data');
-Route::get('/video', [App\Http\Controllers\VideoController::class, 'show'])->name('video.list');
-Route::post('/video/store', [App\Http\Controllers\VideoController::class, 'store'])->name('video.store');
-Route::delete('/video/destroy/{id}', [App\Http\Controllers\VideoController::class, 'destroy'])->name('video.destroy');
+Route::get('/video/data', [App\Http\Controllers\VideoAlbumController::class, 'index'])->name('videoAlbum.data');
+Route::get('/video', [App\Http\Controllers\VideoAlbumController::class, 'show'])->name('videoAlbum.list');
+Route::post('/video/store', [App\Http\Controllers\VideoAlbumController::class, 'store'])->name('videoAlbum.store');
+Route::delete('/video/destroy/{id}', [App\Http\Controllers\VideoAlbumController::class, 'destroy'])->name('videoAlbum.destroy');
 
 
 //image routes

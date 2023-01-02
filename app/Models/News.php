@@ -25,6 +25,6 @@ class News extends Model
 
     public function album()
     {
-        return $this->morphMany(Album::class, 'imagable');
+        return $this->morphMany(PhotoAlbum::class, 'imagable');
     }
 }

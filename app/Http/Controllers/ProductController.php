@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Album;
+use App\Models\PhotoAlbum;
 use App\Models\Image;
 use App\Models\Vendor;
 use App\Models\Product;
@@ -72,7 +72,7 @@ class ProductController extends Controller
 
         if ($request->image_array) {
             foreach (explode(',', $request->image_array) as $single) {
-                $album_images = new Album();
+                $album_images = new PhotoAlbum();
                 $album_images->image_id =  $single;
                 $product->album()->save($album_images);
             }
@@ -148,7 +148,7 @@ class ProductController extends Controller
 
         if ($request->image_array) {
             foreach (explode(',', $request->image_array) as $single) {
-                $album_images = new Album();
+                $album_images = new PhotoAlbum();
                 $album_images->image_id =  $single;
                 $product->album()->save($album_images);
             }

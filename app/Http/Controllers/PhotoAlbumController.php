@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Album;
+use App\Models\PhotoAlbum;
 use App\Models\Image;
 use Illuminate\Http\Request;
 
-class AlbumController extends Controller
+class PhotoAlbumController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -44,7 +44,7 @@ class AlbumController extends Controller
      * @param  \App\Models\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function show(Album $album)
+    public function show()
     {
         //
     }
@@ -55,7 +55,7 @@ class AlbumController extends Controller
      * @param  \App\Models\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function edit(Album $album)
+    public function edit()
     {
         //
     }
@@ -67,7 +67,7 @@ class AlbumController extends Controller
      * @param  \App\Models\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Album $album)
+    public function update()
     {
         //
     }
@@ -78,7 +78,7 @@ class AlbumController extends Controller
      * @param  \App\Models\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Album $album)
+    public function destroy()
     {
         //
     }

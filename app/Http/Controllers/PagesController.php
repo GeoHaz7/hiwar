@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
-use App\Models\Album;
+use App\Models\PhotoAlbum;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -62,7 +62,7 @@ class PagesController extends Controller
 
         if ($request->image_array) {
             foreach (explode(',', $request->image_array) as $single) {
-                $album_images = new Album();
+                $album_images = new PhotoAlbum();
                 $album_images->image_id =  $single;
                 $page->album()->save($album_images);
             }
@@ -130,7 +130,7 @@ class PagesController extends Controller
 
         if ($request->image_array) {
             foreach (explode(',', $request->image_array) as $single) {
-                $album_images = new Album();
+                $album_images = new PhotoAlbum();
                 $album_images->image_id =  $single;
                 $page->album()->save($album_images);
             }

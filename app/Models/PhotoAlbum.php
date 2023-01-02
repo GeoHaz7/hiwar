@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Album extends Model
+class PhotoAlbum extends Model
 {
     use HasFactory,
         SoftDeletes,
         CascadeSoftDeletes;
 
-    protected $primaryKey = 'album_id';
+    protected $primaryKey = 'photoAlbum_id';
     protected $cascadeDeletes = ['images'];
 
     protected $fillable = [

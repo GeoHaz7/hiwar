@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use App\Models\Page;
-use App\Models\Album;
+use App\Models\PhotoAlbum;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -143,7 +143,7 @@ class ImagesController extends Controller
     {
         $filename =  $request->get('filename');
         $image = Image::where('filename', $filename)->first();
-        $album = Album::where('image_id', $image->image_id)->first();
+        $album = PhotoAlbum::where('image_id', $image->image_id)->first();
 
         $image->delete();
         $album->delete();

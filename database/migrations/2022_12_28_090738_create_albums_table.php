@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('albums', function (Blueprint $table) {
-            $table->increments('album_id');
+        Schema::create('photo_albums', function (Blueprint $table) {
+            $table->increments('photoAlbum_id');
             $table->unsignedInteger('image_id');
             $table->foreign('image_id')->references('image_id')->on('images')->onDelete('cascade');
             $table->morphs('imagable');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('albums');
+        Schema::dropIfExists('photo_albums');
     }
 };

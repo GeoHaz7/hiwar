@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Image;
+use App\Models\Vendor;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,12 +19,20 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::select('product_id', 'name', 'price', 'vendor_id', 'filename', 'status')
+        $products = Product::select('product_id', 'name', 'price', 'vendor_id', 'filename', 'status')
             ->leftjoin('images', 'images.image_id', '=', 'products.feature_image');
 
 
+        //getting user id
+        foreach ($products as $product) {
+            $vendor = Vendor::where('vendor_id', $product->vendor_id)->first();
+            $products->user_id = $vendor->user_id;
+        }
 
-        return DataTables::eloquent($product)
+
+
+
+        return DataTables::eloquent($products)
             ->make(true);
     }
 

@@ -141,16 +141,23 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="fa fa-globe"></i>
+                            <i class="far fa-map"></i>
                             <span>Maps</span>
+                            {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
                                 <li>
-                                    <a href="#">Google maps</a>
+                                    <a href="{{ route('album.list') }}">All Album
+                                        {{-- <span
+                                         class="badge badge-pill badge-success"
+                                         >Pro</span> --}}
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#">Open street map</a>
+                                    <a href="{{ route('album.create') }}">Add Album
+                                        {{-- <span class="badge badge-pill badge-success">Pro</span> --}}
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -174,9 +181,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('album.list') }}">
                             <i class="fa fa-folder"></i>
-                            <span>Examples</span>
+                            <span>Albums</span>
                         </a>
                     </li>
                 </ul>

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container col-10 py-3">
 
-        <h2 class="card-title mt-3 text-center ">Vendor Account List</h2>
+        <h2 class="headerText">Vendor Account List</h2>
 
         <table id="example" class="display stripe table table-hover compact dataTable dtr-inline cell-border collapsed"
             style="width:100%">

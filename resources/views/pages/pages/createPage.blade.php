@@ -3,7 +3,7 @@
 @section('content')
     <div class="container col-10 py-3">
         <div>
-            <h2 class="card-title mt-3 text-center ">Add A Page</h2>
+            <h2 class="headerText">Add A Page</h2>
             {{-- <p class="text-center">Get started with your free account</p> --}}
 
             <form id="pageForm" class="mt-5 ">

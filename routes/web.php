@@ -61,6 +61,14 @@ Route::get('/news/edit/{id}', [App\Http\Controllers\NewsController::class, 'edit
 Route::post('/news/update/{id}', [App\Http\Controllers\NewsController::class, 'update'])->name('news.update');
 Route::delete('/news/destroy/{id}', [App\Http\Controllers\NewsController::class, 'destroy'])->name('news.destroy');
 
+Route::get('/album/data', [App\Http\Controllers\AlbumController::class, 'index'])->name('album.data');
+Route::get('/album', [App\Http\Controllers\AlbumController::class, 'show'])->name('album.list');
+Route::get('/album/create', [App\Http\Controllers\AlbumController::class, 'create'])->name('album.create');
+Route::post('/album/store', [App\Http\Controllers\AlbumController::class, 'store'])->name('album.store');
+Route::get('/album/edit/{id}', [App\Http\Controllers\AlbumController::class, 'edit'])->name('album.edit');
+Route::post('/album/update/{id}', [App\Http\Controllers\AlbumController::class, 'update'])->name('album.update');
+Route::delete('/album/destroy/{id}', [App\Http\Controllers\AlbumController::class, 'destroy'])->name('album.destroy');
+
 
 Route::get('/video/data', [App\Http\Controllers\VideoAlbumController::class, 'index'])->name('videoAlbum.data');
 Route::get('/video', [App\Http\Controllers\VideoAlbumController::class, 'show'])->name('videoAlbum.list');

@@ -3,17 +3,16 @@
 @section('content')
     <div class="container col-10 py-3">
 
-        <h2 class="headerText">News List</h2>
+        <h2 class="headerText ">Album List</h2>
 
         <table id="example" class="display stripe table table-hover compact dataTable dtr-inline cell-border collapsed"
-            style="width:100%">
+            style="width:100%;">
             <thead>
                 <tr>
                     <th>Featured Image</th>
-                    <th>Title</th>
-                    <th>Brief</th>
-                    <th>Category</th>
-                    <th><a class="btn btn-primary" href="{{ Route('news.create') }}">Add</a></th>
+                    <th>Name</th>
+                    <th>Count</th>
+                    <th><a class="btn btn-primary" href="{{ Route('album.create') }}">Add</a></th>
                 </tr>
             </thead>
 
@@ -28,7 +27,7 @@
 
 
             var table = $('#example').DataTable({
-                "ajax": "{{ route('news.data') }}",
+                "ajax": "{{ route('album.data') }}",
                 "columns": [{
                         "data": "filename",
                         orderable: false,
@@ -41,17 +40,14 @@
                             return '<img class="listVendorProfile" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png" />';
                         }
                     }, {
-                        "data": "title"
-                    },
-                    {
-                        "data": "brief"
-                    },
-                    {
-                        "data": "category"
+                        "data": "name"
+
+                    }, {
+                        "data": "image_counter"
 
                     },
                     {
-                        "data": "news_id",
+                        "data": "album_id",
                         orderable: false,
                         render: function(data, type, row, meta) {
                             return ('<i class="fa fa-edit text-primary" data-id="' +
@@ -65,12 +61,11 @@
             });
 
 
-
             // Delete a record
             $('#example').on('click', '.editor-delete', function(e) {
                 e.preventDefault();
                 var id = $(this).data('id');
-                var url = "{{ route('news.destroy', ':id') }}";
+                var url = "{{ route('album.destroy', ':id') }}";
                 url = url.replace(':id', id);
                 Swal.fire({
                     icon: 'warning',
@@ -97,7 +92,7 @@
             $('#example').on('click', '.fa-edit', function(e) {
                 e.preventDefault();
                 var id = $(this).data('id');
-                var url = "{{ route('news.edit', ':id') }}";
+                var url = "{{ route('album.edit', ':id') }}";
                 url = url.replace(':id', id);
                 window.location.href = url;
             });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
 use App\Models\News;
 use App\Models\Page;
 use App\Models\PhotoAlbum;
@@ -80,6 +81,10 @@ class ImagesController extends Controller
 
             case ('news'):
                 $images = News::find($request->id)->album;
+                break;
+
+            case ('album'):
+                $images = Album::find($request->id)->album;
                 break;
 
             default:

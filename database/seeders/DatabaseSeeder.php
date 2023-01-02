@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Album;
 use App\Models\News;
 use App\Models\Page;
 use App\Models\User;
@@ -56,6 +58,7 @@ class DatabaseSeeder extends Seeder
         News::factory(4)->create();
         Image::factory(4)->create();
         Product::factory(4)->create();
+        Album::factory(4)->create();
 
         for ($i = 0; $i < 4; $i++) {
             $url = $link[$i];

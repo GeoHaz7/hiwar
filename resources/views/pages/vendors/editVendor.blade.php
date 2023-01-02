@@ -3,7 +3,7 @@
 @section('content')
     <div class="container col-10 py-3">
         {{-- {{ dd($vendor->thumbnail->filename) }} --}}
-        <h2 class="card-title mt-3 text-center ">Edit A Vendor Account</h2>
+        <h2 class="headerText">Edit A Vendor Account</h2>
         {{-- <p class="text-center">Get started with your free account</p> --}}
         <form id="vendorForm" class="mt-5 ">
             <div class="center mb-3">

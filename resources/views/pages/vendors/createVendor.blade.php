@@ -3,7 +3,7 @@
 @section('content')
     <div class="container col-10">
         <div>
-            <h2 class="card-title mt-3 text-center ">Add A Vendor Account</h2>
+            <h2 class="headerText">Add A Vendor Account</h2>
             {{-- <p class="text-center">Get started with your free account</p> --}}
 
             <form id="vendorForm" class="mt-5 ">

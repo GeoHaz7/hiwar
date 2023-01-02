@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Page;
-use App\Models\Image;
 use App\Models\News;
+use App\Models\Page;
+use App\Models\Album;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -131,21 +132,25 @@ class ImagesController extends Controller
     {
         // $filename =  $request->get('filename');
         Image::where('filename', $filename)->delete();
-        $path = public_path('uploads/gallery/') . $filename;
-        if (file_exists($path)) {
-            unlink($path);
-        }
+        // $path = public_path('uploads/gallery/') . $filename;
+        // if (file_exists($path)) {
+        //     unlink($path);
+        // }
         return response()->json(['success' => $filename]);
     }
 
     public function delete(Request $request)
     {
         $filename =  $request->get('filename');
-        Image::where('filename', $filename)->delete();
-        $path = public_path('uploads/gallery/') . $filename;
-        if (file_exists($path)) {
-            unlink($path);
-        }
+        $image = Image::where('filename', $filename)->first();
+        $album = Album::where('image_id', $image->image_id)->first();
+
+        $image->delete();
+        $album->delete();
+        // $path = public_path('uploads/gallery/') . $filename;
+        // if (file_exists($path)) {
+        //     unlink($path);
+        // }
         return response()->json(['success' => $filename]);
     }
 }

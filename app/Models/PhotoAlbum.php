@@ -14,7 +14,7 @@ class PhotoAlbum extends Model
         CascadeSoftDeletes;
 
     protected $primaryKey = 'photoAlbum_id';
-    protected $cascadeDeletes = ['images'];
+    // protected $cascadeDeletes = ['images'];
 
     protected $fillable = [
         'image_id',

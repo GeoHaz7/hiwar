@@ -31,20 +31,26 @@ class AppServiceProvider extends ServiceProvider
 
         ///get file name of logged in user
         view()->composer('*', function ($view) {
-            if (Auth::user()->type == 2) {
-
-                $Data = DB::table('vendors')->select('filename', 'user_id', 'full_name')
-                    ->leftjoin('images', 'images.image_id', '=', 'vendors.profile_image')
-                    ->where('user_id', Auth::user()->user_id)->first();
+            if (!Auth::check()) {
+                $Data = null;
             } else {
-                $Data = DB::table('users')->select('username', 'type')
-                    ->where('user_id', Auth::user()->user_id)->first();
 
-                $Data->full_name = $Data->username;
+                if (Auth::user()->type == 2) {
+
+                    $Data = DB::table('vendors')->select('filename', 'user_id', 'full_name')
+                        ->leftjoin('images', 'images.image_id', '=', 'vendors.profile_image')
+                        ->where('user_id', Auth::user()->user_id)->first();
+                } else {
+                    $Data = DB::table('users')->select('username', 'type')
+                        ->where('user_id', Auth::user()->user_id)->first();
+
+                    $Data->full_name = $Data->username;
+                    $Data->filename = null;
+                }
+
+
+                $view->with('data', $Data);
             }
-
-
-            $view->with('data', $Data);
         });
     }
 }

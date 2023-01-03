@@ -15,7 +15,7 @@
             <div class="sidebar-header">
                 <div class="user-pic">
                     <img class="img-responsive img-rounded"
-                        src="{{ url('uploads/gallery') . '/' . ($data->filename ? $data->filename : URL::asset('assets/profile.jpeg')) }}"
+                        src="{{ $data->filename ? url('uploads/gallery') . '/' . $data->filename : URL::asset('assets/profile.jpeg') }}"
                         alt="User picture">
                 </div>
 

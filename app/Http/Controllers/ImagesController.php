@@ -147,15 +147,8 @@ class ImagesController extends Controller
     public function delete(Request $request)
     {
         $filename =  $request->get('filename');
-        $image = Image::where('filename', $filename)->first();
-        $album = PhotoAlbum::where('image_id', $image->image_id)->first();
+        $image = Image::where('filename', $filename)->first()->delete();
 
-        $image->delete();
-        $album->delete();
-        // $path = public_path('uploads/gallery/') . $filename;
-        // if (file_exists($path)) {
-        //     unlink($path);
-        // }
         return response()->json(['success' => $filename]);
     }
 }

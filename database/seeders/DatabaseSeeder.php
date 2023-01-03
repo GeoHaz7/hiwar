@@ -9,6 +9,7 @@ use App\Models\News;
 use App\Models\Page;
 use App\Models\User;
 use App\Models\Image;
+use App\Models\Option;
 use App\Models\VideoAlbum;
 use App\Models\Vendor;
 use App\Models\Product;
@@ -23,6 +24,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $optionName = [
+            'website_name',
+            'website_description',
+            'website_lang',
+            'website_photo'
+        ];
+
+        $optionValue = [
+            'Hiwar',
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+            'EN',
+            'logo.png'
+        ];
 
 
         $name = [
@@ -68,6 +82,13 @@ class DatabaseSeeder extends Seeder
                 'name' => $name[$i],
                 'link' => $link[$i],
                 'linkShortcut' => $my_array_of_vars['v']
+            ]);
+        }
+
+        for ($i = 0; $i < 4; $i++) {
+            Option::create([
+                'name' => $optionName[$i],
+                'value' => $optionValue[$i],
             ]);
         }
 

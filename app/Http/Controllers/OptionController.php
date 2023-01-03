@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Option;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class OptionController extends Controller
 {
@@ -14,7 +15,11 @@ class OptionController extends Controller
      */
     public function index()
     {
-        //
+        $options = Option::select('*');
+
+
+        return DataTables::eloquent($options)
+            ->make(true);
     }
 
     /**
@@ -46,7 +51,7 @@ class OptionController extends Controller
      */
     public function show(Option $option)
     {
-        //
+        return view('pages.options.listoptions');
     }
 
     /**
@@ -55,9 +60,8 @@ class OptionController extends Controller
      * @param  \App\Models\Option  $option
      * @return \Illuminate\Http\Response
      */
-    public function edit(Option $option)
+    public function edit()
     {
-        //
     }
 
     /**

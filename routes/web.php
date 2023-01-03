@@ -76,6 +76,10 @@ Route::post('/video/store', [App\Http\Controllers\VideoAlbumController::class, '
 Route::delete('/video/destroy/{id}', [App\Http\Controllers\VideoAlbumController::class, 'destroy'])->name('videoAlbum.destroy');
 
 
+Route::get('/option/data', [App\Http\Controllers\OptionController::class, 'index'])->name('option.data');
+Route::get('/option', [App\Http\Controllers\OptionController::class, 'show'])->name('option.list');
+
+
 //image routes
 Route::get('/image/show/', [ImagesController::class, 'show'])->name('image.show');
 Route::post('/image/store', [ImagesController::class, 'store'])->name('image.store');

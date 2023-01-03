@@ -169,13 +169,6 @@
                         <span>Extra</span>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-book"></i>
-                            <span>Documentation</span>
-                            <span class="badge badge-pill badge-primary">Beta</span>
-                        </a>
-                    </li>
-                    <li>
                         </a>
 
                         <a href="{{ route('videoAlbum.list') }}">
@@ -187,6 +180,13 @@
                         <a href="{{ route('album.list') }}">
                             <i class="fa fa-folder"></i>
                             <span>Albums</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('option.list') }}">
+                            <i class="fa fa-book"></i>
+                            <span>Options</span>
+                            <span class="badge badge-pill badge-primary">Beta</span>
                         </a>
                     </li>
                 </ul>

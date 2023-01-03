@@ -11,7 +11,7 @@
                     <div class="form-input">
                         <div class="preview">
                             <img class="mx-auto mb-3 d-block" id="file-ip-1-preview"
-                                src="{{ $page->thumbnail ? url('uploads/gallery') . '/' . $page->thumbnail->filename : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png' }}">
+                                src="{{ $page->thumbnail ? url('uploads/gallery') . '/' . $page->thumbnail->filename : URL::asset('assets/noImage.png') }}">
 
 
                         </div>

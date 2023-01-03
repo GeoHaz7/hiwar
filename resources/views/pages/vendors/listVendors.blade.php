@@ -40,7 +40,7 @@
                                     data + '" />';
                             }
 
-                            return '<img class="listVendorProfile" src="https://www.kindpng.com/picc/m/24-248253_user-prof`ile-default-image-png-clipart-png-download.png" />';
+                            return '<img class="listVendorProfile" src="{{ URL::asset('assets/profile.jpeg') }}" />';
                         }
                     },
                     {

@@ -10,7 +10,7 @@
                 <div class="form-input">
                     <div class="preview">
                         <img class="mx-auto mb-3 d-block" id="file-ip-1-preview"
-                            src="{{ $vendor->thumbnail ? url('uploads/gallery') . '/' . $vendor->thumbnail->filename : 'https://www.kindpng.com/picc/m/24-248253_user-prof`ile-default-image-png-clipart-png-download.png' }}">
+                            src="{{ $vendor->thumbnail ? url('uploads/gallery') . '/' . $vendor->thumbnail->filename : URL::asset('assets/profile.jpeg') }}">
                     </div>
 
                     <label for="file-ip-1">Upload Image</label>

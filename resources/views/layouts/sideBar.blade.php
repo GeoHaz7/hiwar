@@ -14,14 +14,17 @@
             </div>
             <div class="sidebar-header">
                 <div class="user-pic">
-                    <img class="img-responsive img-rounded" src="{{ URL::asset('assets/profile.jpeg') }}"
+                    <img class="img-responsive img-rounded"
+                        src="{{ url('uploads/gallery') . '/' . ($data->filename ? $data->filename : URL::asset('assets/profile.jpeg')) }}"
                         alt="User picture">
                 </div>
+
                 <div class="user-info">
-                    <span class="user-name">Jhon
-                        <strong>Smith</strong>
+                    <span class="user-name">{{ $data->full_name }}
+
                     </span>
-                    <span class="user-role">Administrator</span>
+                    <span
+                        class="user-role">{{ Auth::user()->type == 2 ? 'Vendor' : (Auth::user()->type == 1 ? 'Admin' : 'Super Admin') }}</span>
                     <span class="user-status">
                         <i class="fa fa-circle"></i>
                         <span>Online</span>
@@ -29,7 +32,7 @@
                 </div>
             </div>
             <!-- sidebar-header  -->
-            <div class="sidebar-search">
+            {{-- <div class="sidebar-search">
                 <div>
                     <div class="input-group">
                         <input type="text" class="form-control search-menu" placeholder="Search...">
@@ -41,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <!-- sidebar-search  -->
+            <!-- sidebar-search  --> --}}
             <div class="sidebar-menu">
                 <ul>
                     <li class="header-menu">
@@ -141,8 +144,8 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
-                            <i class="far fa-map"></i>
-                            <span>Maps</span>
+                            <i class="far fa-image"></i>
+                            <span>Album</span>
                             {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
                         <div class="sidebar-submenu">

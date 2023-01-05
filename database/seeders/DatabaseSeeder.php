@@ -48,9 +48,9 @@ class DatabaseSeeder extends Seeder
 
         $link = [
             'https://www.youtube.com/watch?v=yKve2Q52bX0',
-            'https://www.youtube.com/watch?v=IofeeSQ4T2I&t=112s',
-            'https://www.youtube.com/watch?v=PkCIiDVotlE&t=75s',
-            'https://www.youtube.com/watch?v=M7CTQ7OeqCg&t=651s'
+            'https://www.youtube.com/watch?v=IofeeSQ4T2I',
+            'https://www.youtube.com/watch?v=PkCIiDVotlE',
+            'https://www.youtube.com/watch?v=M7CTQ7OeqCg'
         ];
 
         // \App\Models\User::factory(10)->create();

@@ -41,11 +41,13 @@ class VideoAlbumController extends Controller
     {
         $url = $request->videoLink;
         parse_str(parse_url($url, PHP_URL_QUERY), $my_array_of_vars);
+        $videoLink = substr($url, 0, strpos($url, "&"));
+
 
 
         VideoAlbum::create([
             'name' => $request->videoName,
-            'link' => $request->videoLink,
+            'link' => $videoLink,
             'linkShortcut' => $my_array_of_vars['v'],
         ]);
 

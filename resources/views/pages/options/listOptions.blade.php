@@ -27,6 +27,7 @@
 
             var table = $('#example').DataTable({
                 "ajax": "{{ route('option.data') }}",
+                "order" : [2 , 'ASC'],
                 "columns": [{
                         "data": "name",
                         render: function(data, type, row, meta) {

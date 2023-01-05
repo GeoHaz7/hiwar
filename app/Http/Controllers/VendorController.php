@@ -96,7 +96,7 @@ class VendorController extends Controller
     public function edit($id)
     {
         $vendor = Vendor::where('vendor_id', $id)->first();
-        $user = $vendor->user()->first();
+        $user = $vendor->user;
 
 
         return view('pages.vendors.editVendor', ['user' => $user, 'vendor' => $vendor]);
@@ -112,8 +112,8 @@ class VendorController extends Controller
     public function update(Request $request, $id)
     {
         $vendor = Vendor::where('vendor_id', $id)->first();
-        $user = User::where('user_id', $vendor->user_id)->first();
-        $image = Image::where('image_id', $vendor->profile_image)->first();
+        $user = $vendor->user;
+        $image = $vendor->thumbnail;
 
 
 
@@ -138,7 +138,7 @@ class VendorController extends Controller
             'status' => 1,
             'address' => $request->vendorAddress,
             'phone' => $request->vendorPhone,
-            'user_id' => $user->user_id,
+            'user_id    ' => $user->user_id,
             'profile_image' => $idd,
         ]);
 

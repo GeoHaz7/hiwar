@@ -171,7 +171,7 @@
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
                                 if (response == 'success') {
-                                    window.location = '/vendor';
+                                    window.location = '/vendors';
 
                                 }
                             });

@@ -11,7 +11,7 @@
                 <tr>
                     <th>Name</th>
                     <th width="450">Value</th>
-                    <th><a class="btn btn-primary" href="{{ Route('news.create') }}">Add</a></th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -57,8 +57,8 @@
                         "className": "text-center",
                         render: function(data, type, row, meta) {
                             if (row.name == 'website_photo') {
-                                return '<img class="listVendorProfile" src="{{ URL::asset('assets/') }}/' +
-                                    data + '" />'
+                                return '<img class="listVendorProfile" src="{{ url('uploads/gallery') . '/' }}' +
+                                    data + '" />';
                             } else {
                                 return data;
                             }
@@ -71,19 +71,19 @@
                             var text = '';
                             switch (row.name) {
                                 case ('website_name'):
-                                    text = 'Website Name';
+                                    text = 'website name';
                                     break;
 
                                 case ('website_description'):
-                                    text = 'Website Description';
+                                    text = 'website description';
                                     break;
 
                                 case ('website_lang'):
-                                    text = 'Default Language';
+                                    text = 'default language';
                                     break;
 
                                 case ('website_photo'):
-                                    text = 'Website logo';
+                                    text = 'website logo';
                                     break;
                             }
                             return '<button class="btn btn-primary edit" data-id="' + data +
@@ -99,70 +99,237 @@
             $('#example').on('click', '.edit', function(e) {
                 e.preventDefault();
                 var id = $(this).data('id');
+                var optionName = $(this).data('name');
                 var url = "{{ route('news.edit', ':id') }}";
                 url = url.replace(':id', id);
-                Swal.fire({
-                    title: 'Add Video Link',
-                    html: `<input type="text" id="videoName" class="swal2-input" placeholder="Video Name">
-  <input type="text" id="videoLink" class="swal2-input" placeholder="Video Link">`,
-                    confirmButtonText: 'Add Link',
-                    focusConfirm: false,
-                    preConfirm: () => {
-                        const videoName = Swal.getPopup().querySelector('#videoName').value
-                        const videoLink = Swal.getPopup().querySelector('#videoLink').value
-                        if (!videoName || !videoLink) {
-                            Swal.showValidationMessage(`Please enter a name and a link`)
-                        } else {
-                            var regExp =
-                                /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
-                            var match = videoLink.match(regExp);
-                            if (match && match[2].length == 11) {
-                                // Do anything for being valid
 
-                            } else {
-                                Swal.showValidationMessage(
-                                    `Please enter a valid youtube link`)
-                            }
-                        }
+                $.ajax({
+                    url: "{{ route('option.data') }}",
+                    type: "GET",
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log(response);
+                        var websiteName = response.data[0].value;
+                        var websiteDescription = response.data[1].value;
+                        var websiteLang = response.data[2].value;
+                        var websiteLogo = response.data[3].value;
 
+                        (async () => {
+                            if (optionName == 'default language') {
 
-                        return {
-                            videoName: videoName,
-                            videoLink: videoLink
-                        }
-                    }
-                }).then((result) => {
-                    var fd = new FormData();
-                    fd.append('videoName', result.value.videoName);
-                    fd.append('videoLink', result.value.videoLink);
-                    fd.append('_token', '{{ csrf_token() }}');
+                                const inputOptions = new Promise((resolve) => {
+                                    resolve({
+                                        'AR': 'Arabic',
+                                        'EN': 'English',
+                                    })
+                                })
 
 
-                    $.ajax({
-                        url: "{{ route('videoAlbum.store') }}",
-                        type: "POST",
-                        processData: false,
-                        contentType: false,
-                        data: fd,
-                        success: function(response) {
-                            if (response == 'success') {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: response,
-                                    showDenyButton: false,
-                                    showCancelButton: false,
-                                    confirmButtonText: 'Yes'
-                                }).then((result) => {
-                                    if (response == 'success') {
-                                        table.ajax.reload(null);
+                                const {
+                                    value: lang
+                                } = await Swal.fire({
+                                    title: 'Select Default Language',
+                                    input: 'radio',
+                                    inputValue: websiteLang,
+                                    inputOptions: inputOptions,
+                                    showCancelButton: true,
+                                    inputValidator: (value) => {
 
                                     }
-                                });
+                                })
+
+                                if (lang) {
+                                    var fd = new FormData();
+
+                                    fd.append('websiteLang', lang);
+                                    fd.append('_token', '{{ csrf_token() }}');
+
+                                    $.ajax({
+                                        url: "{{ route('option.update') }}",
+                                        type: "POST",
+                                        processData: false,
+                                        contentType: false,
+                                        data: fd,
+                                        success: function(response) {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: response,
+                                                showDenyButton: false,
+                                                showCancelButton: false,
+                                                confirmButtonText: 'Yes'
+                                            }).then((result) => {
+                                                table.ajax
+                                                    .reload(
+                                                        null
+                                                    );
+
+
+                                            });
+                                        },
+                                        error: function(err) {}
+                                    });
+                                }
+
+                            } else if (optionName == 'website logo') {
+                                const {
+                                    value: file
+                                } = await Swal.fire({
+                                    title: 'Select Logo',
+                                    input: 'file',
+                                    showCancelButton: true,
+                                    inputAttributes: {
+                                        'accept': 'image/*',
+                                        'aria-label': 'Upload your new logo'
+                                    }
+                                })
+
+                                if (file) {
+                                    const reader = new FileReader()
+                                    reader.onload = (e) => {
+                                        Swal.fire({
+                                            title: 'Your uploaded logo',
+                                            imageUrl: e.target.result,
+                                            imageAlt: 'The uploaded logo',
+                                            showCancelButton: true
+                                        })
+                                    }
+
+                                    var fd = new FormData();
+
+                                    fd.append('file', $('.swal2-file')[0].files[
+                                        0]);
+                                    fd.append('_token', '{{ csrf_token() }}');
+
+                                    $.ajax({
+                                        url: "{{ route('option.update') }}",
+                                        type: "POST",
+                                        processData: false,
+                                        contentType: false,
+                                        data: fd,
+                                        success: function(response) {
+
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: response,
+                                                showDenyButton: false,
+                                                showCancelButton: false,
+                                                confirmButtonText: 'Yes'
+                                            }).then((result) => {
+                                                reader
+                                                    .readAsDataURL(
+                                                        file)
+                                                table.ajax
+                                                    .reload(
+                                                        null
+                                                    );
+
+
+                                            });
+                                        },
+                                        error: function(err) {}
+                                    });
+
+                                }
+
+                            } else if (optionName == 'website description') {
+                                const {
+                                    value: description
+                                } = await Swal.fire({
+                                    title: 'Edit The Website Name',
+                                    input: 'textarea',
+                                    inputValue: websiteDescription,
+                                    inputPlaceholder: 'Type your message here...',
+                                    inputAttributes: {
+                                        'aria-label': 'Type your message here'
+                                    },
+                                    showCancelButton: true
+                                })
+
+                                if (description) {
+                                    var fd = new FormData();
+
+                                    fd.append('websiteDescription', description);
+                                    fd.append('_token', '{{ csrf_token() }}');
+
+                                    $.ajax({
+                                        url: "{{ route('option.update') }}",
+                                        type: "POST",
+                                        processData: false,
+                                        contentType: false,
+                                        data: fd,
+                                        success: function(response) {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: response,
+                                                showDenyButton: false,
+                                                showCancelButton: false,
+                                                confirmButtonText: 'Yes'
+                                            }).then((result) => {
+                                                table.ajax
+                                                    .reload(
+                                                        null
+                                                    );
+
+
+                                            });
+                                        },
+                                        error: function(err) {}
+                                    });
+                                }
+
+                            } else if (optionName == 'website name') {
+                                const {
+                                    value: name
+                                } = await Swal.fire({
+                                    title: 'Edit The Website Name',
+                                    input: 'text',
+                                    inputValue: websiteName,
+                                    inputPlaceholder: 'Enter New Webiste Name',
+                                    showCancelButton: true
+
+                                })
+
+                                if (name) {
+                                    var fd = new FormData();
+
+                                    fd.append('websiteName', name);
+                                    fd.append('_token', '{{ csrf_token() }}');
+
+                                    $.ajax({
+                                        url: "{{ route('option.update') }}",
+                                        type: "POST",
+                                        processData: false,
+                                        contentType: false,
+                                        data: fd,
+                                        success: function(response) {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: response,
+                                                showDenyButton: false,
+                                                showCancelButton: false,
+                                                confirmButtonText: 'Yes'
+                                            }).then((result) => {
+                                                table.ajax
+                                                    .reload(
+                                                        null
+                                                    );
+                                            });
+                                        },
+                                        error: function(err) {}
+                                    });
+                                }
                             }
-                        },
-                        error: function(err) {}
-                    });
-                })
+                        })()
+                    },
+                    error: function(err) {
+
+                    }
+                });
+
+
+
+
             });
 
 

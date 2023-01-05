@@ -78,6 +78,7 @@ Route::delete('/video/destroy/{id}', [App\Http\Controllers\VideoAlbumController:
 
 Route::get('/option/data', [App\Http\Controllers\OptionController::class, 'index'])->name('option.data');
 Route::get('/option', [App\Http\Controllers\OptionController::class, 'show'])->name('option.list');
+Route::post('/option/update', [App\Http\Controllers\OptionController::class, 'update'])->name('option.update');
 
 
 //image routes

@@ -41,12 +41,23 @@
     <script>
         $(document).ready(function() {
 
-            
+            $.ajax({
+                url: "{{ route('cart.totalItems') }}",
+                type: "GET",
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.message == "success") {
+                        $(".itemCount").html(response.totalItems);
+                    }
+                },
+                error: function(err) {}
+            });
 
 
             $('.addToCart').on('click', function(e) {
                 var id = $(this).data('id');
-                var url = "{{ route('productcs.addToCart', ':id') }}";
+                var url = "{{ route('cart.addTo', ':id') }}";
                 url = url.replace(':id', id);
 
                 $.ajax({

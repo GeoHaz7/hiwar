@@ -73,8 +73,9 @@ Route::group(
         Route::post('/album/update/{id}', [App\Http\Controllers\AlbumController::class, 'update'])->name('album.update');
         Route::delete('/album/destroy/{id}', [App\Http\Controllers\AlbumController::class, 'destroy'])->name('album.destroy');
 
-        Route::get('/products', [App\Http\Controllers\ProductController::class, 'test'])->name('productcs.test');
-        Route::get('/products/add/{id}', [App\Http\Controllers\ProductController::class, 'addToCartCookie'])->name('productcs.addToCart');
+        Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+        Route::get('/cart/add/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('cart.addTo');
+        Route::get('/cart/itemTotal', [App\Http\Controllers\CartController::class, 'getCartTotalItems'])->name('cart.totalItems');
 
 
         Route::get('/video/data', [App\Http\Controllers\VideoAlbumController::class, 'index'])->name('videoAlbum.data');

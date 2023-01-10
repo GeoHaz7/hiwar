@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use stdClass;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -60,5 +61,28 @@ class CartController extends Controller
             $totalcarts = count($cart);
             return response()->json(['message' => 'success', 'totalItems' => $totalcarts])->cookie('cart', json_encode($cart), 60);
         }
+    }
+
+    public function show(Request $request)
+    {
+        $cart = json_decode($request->cookie('cart'));
+
+        $products = [];
+
+        foreach ($cart as $key => $value) {
+            $loopProduct = Product::find($value->product_id);
+
+            $product = new stdClass();
+            $product->product_id = $value->product_id;
+            $product->name = $loopProduct->name;
+            $product->price = $loopProduct->price;
+            $product->thumbnail = $loopProduct->thumbnail->filename;
+            $product->quantiy = $value->quantity;
+
+            array_push($products, $product);
+        }
+
+
+        return view('pages.products.testList', ['product' => $products]);
     }
 }

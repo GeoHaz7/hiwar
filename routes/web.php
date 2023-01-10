@@ -73,7 +73,8 @@ Route::group(
         Route::post('/album/update/{id}', [App\Http\Controllers\AlbumController::class, 'update'])->name('album.update');
         Route::delete('/album/destroy/{id}', [App\Http\Controllers\AlbumController::class, 'destroy'])->name('album.destroy');
 
-        Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+        Route::get('/cart/list', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+        Route::get('/cart/my', [App\Http\Controllers\CartController::class, 'show'])->name('cart.show');
         Route::get('/cart/add/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('cart.addTo');
         Route::get('/cart/itemTotal', [App\Http\Controllers\CartController::class, 'getCartTotalItems'])->name('cart.totalItems');
 
@@ -100,4 +101,6 @@ Route::group(
         //show categories Data Ajax
         Route::get('/vendors/ajax/show/{id}', [Select2Controller::class, 'showVendorDataAjax'])->name('vendors.showDataAjax');
     }
+
+
 );

@@ -145,15 +145,8 @@
                     error.insertAfter(element.parent());
                 },
                 submitHandler: function(form) {
-                    var fd = new FormData();
-                    fd.append('vendorFullName', $('#vendorFullName').val());
-                    fd.append('vendorUsername', $('#vendorUsername').val());
-                    fd.append('vendorEmail', $('#vendorEmail').val());
-                    fd.append('vendorPhone', $('#vendorPhone').val());
-                    fd.append('vendorAddress', $('#vendorAddress').val());
-                    fd.append('vendorBio', $('#vendorBio').val());
-                    fd.append('file', $('#file-ip-1')[0].files[0]);
-                    fd.append('vendorPassword', $('#vendorPassword').val());
+                    var fd = new FormData(form);
+
                     fd.append('_token', '{{ csrf_token() }}');
 
                     $.ajax({

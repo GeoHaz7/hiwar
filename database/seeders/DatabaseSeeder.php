@@ -4,19 +4,24 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Album;
+use Faker\Factory;
 use App\Models\News;
 use App\Models\Page;
 use App\Models\User;
+use App\Models\Album;
 use App\Models\Image;
+use App\Models\Order;
 use App\Models\Option;
-use App\Models\VideoAlbum;
 use App\Models\Vendor;
 use App\Models\Product;
+use App\Models\VideoAlbum;
+use App\Models\OrderProduct;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+
+
     /**
      * Seed the application's database.
      *
@@ -24,6 +29,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Factory::create();
+
         $optionName = [
             'website_name',
             'website_description',
@@ -74,6 +81,21 @@ class DatabaseSeeder extends Seeder
         Product::factory(4)->create();
         Album::factory(4)->create();
 
+
+        for ($i = 0; $i < 3; $i++) {
+            $order =  Order::factory(1)->create();
+
+            for ($o = 0; $o < 2; $o++) {
+                OrderProduct::create([
+                    'order_id' => $order->last()->order_id,
+                    'product_id' => Product::all()->random()->product_id,
+                    'quantity' => $faker->numberBetween(1, 3),
+                ]);
+            }
+        }
+
+
+
         for ($i = 0; $i < 4; $i++) {
             $url = $link[$i];
             parse_str(parse_url($url, PHP_URL_QUERY), $my_array_of_vars);
@@ -91,21 +113,5 @@ class DatabaseSeeder extends Seeder
                 'value' => $optionValue[$i],
             ]);
         }
-
-        // User::create([
-        //     'nickname' => 'Oriana_Element',
-        //     'email' => 'oriana@element.com',
-        //     'password' => '$2y$10$avAiACLwV4KgPTpnJsdeyO3K6u5dzMArXOyNA5WUBTC3yslfNXAn2',
-        //     'type' => '2',
-        // ]);
-
-        // Vendor::create([
-        //     'full_name' => 'Oriana Sabat',
-        //     'bio' =>  'Lorem Ipsum -_-',
-        //     'address' => 'Nativity Street',
-        //     'phone' => '0592341594',
-        //     'status' => 1,
-        //     'user_id' => User::where('nickname', 'Oriana_Element')->first()->user_id
-        // ]);
     }
 }

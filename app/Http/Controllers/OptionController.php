@@ -73,7 +73,6 @@ class OptionController extends Controller
      */
     public function update(Request $request, Option $option)
     {
-
         if ($request->websiteName)
             Option::where('name', 'website_name')->update(['value' => $request->websiteName]);
 

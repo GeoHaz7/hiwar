@@ -79,7 +79,7 @@
 
 
             //switch status
-            $('#example').on('change', '#statusSwitch', function(e) {
+            $('#example').on('click', '#statusSwitch', function(e) {
                 var id = $(this).data('id');
                 var url = "{{ route('vendor.switch', ':id') }}";
                 url = url.replace(':id', id);
@@ -90,30 +90,34 @@
                     showCancelButton: true,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                    $.ajax({
-                        url: url,
-                        type: "POST",
-                        data: {
-                            '_token': '{{ csrf_token() }}'
-                        },
-                        success: function(response) {
-                            if (response == 'success') {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: response,
-                                    showDenyButton: false,
-                                    showCancelButton: false,
-                                    confirmButtonText: 'Yes'
-                                }).then((result) => {
-                                    if (response == 'success') {
-                                        table.ajax.reload(null);
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: url,
+                            type: "POST",
+                            data: {
+                                '_token': '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                if (response == 'success') {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: response,
+                                        showDenyButton: false,
+                                        showCancelButton: false,
+                                        confirmButtonText: 'Yes'
+                                    }).then((result) => {
+                                        if (response == 'success') {
+                                            table.ajax.reload(null);
 
-                                    }
-                                });
-                            }
-                        },
-                        error: function(err) {}
-                    });
+                                        }
+                                    });
+                                }
+                            },
+                            error: function(err) {}
+                        });
+                    } else {
+                        table.ajax.reload(null);
+                    }
                 });
             });
 

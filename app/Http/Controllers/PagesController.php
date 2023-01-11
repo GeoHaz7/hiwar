@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
-use App\Models\PhotoAlbum;
 use App\Models\Image;
+use App\Models\PhotoAlbum;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -58,6 +59,7 @@ class PagesController extends Controller
             'description' => $request->pageDescription,
             'status' => 1,
             'feature_image' => $id,
+            'page_slug' => Str::slug($request->pageTitle),
         ]);
 
         if ($request->image_array) {

@@ -56,8 +56,7 @@
 
 <body>
 
-
-    @include('frontend.header')
+    @include('frontend.header', ['pages' => $pages])
 
     <!-- main -->
     <main class="mainContent toggled ">

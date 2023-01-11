@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Page;
 use App\Models\Vendor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,11 @@ class AppServiceProvider extends ServiceProvider
 
         ///get file name of logged in user
         view()->composer('*', function ($view) {
+            $pages = Page::select('title', 'page_slug')->get();
+
+            view()->share('pages', $pages);
+
+
             if (!Auth::check()) {
                 $Data = null;
             } else {

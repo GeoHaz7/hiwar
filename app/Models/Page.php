@@ -16,6 +16,7 @@ class Page extends Model
         'description',
         'feature_image',
         'status',
+        'page_slug',
     ];
 
     public function thumbnail()

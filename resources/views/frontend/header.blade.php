@@ -80,12 +80,11 @@
                       <li>
                           <a href="javascript:void(0)">من نحن</a>
                       </li>
-                      <li>
-                          <a href="javascript:void(0)"> خدماتنا</a>
-                      </li>
-                      <li>
-                          <a href="javascript:void(0)">قصص نجاح</a>
-                      </li>
+                      @foreach ($pages as $page)
+                          <li>
+                              <a href="/front/page/{{ $page->page_slug }}">{{ $page->title }}</a>
+                          </li>
+                      @endforeach
                       <li>
                           <a href="{{ route('front.contact') }}">إتصل بنا</a>
                       </li>

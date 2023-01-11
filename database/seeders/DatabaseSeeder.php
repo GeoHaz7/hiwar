@@ -15,6 +15,7 @@ use App\Models\Option;
 use App\Models\Vendor;
 use App\Models\Product;
 use App\Models\VideoAlbum;
+use Illuminate\Support\Str;
 use App\Models\OrderProduct;
 use Illuminate\Database\Seeder;
 
@@ -75,7 +76,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Vendor::factory(4)->create();
-        Page::factory(4)->create();
+        $pages = Page::factory(4)->create();
+
+        foreach ($pages as $key => $value) {
+            
+            $pages[$key]->page_slug =
+                Str::slug($pages[$key]->title);
+            $pages[$key]->save();
+            
+        }
         News::factory(4)->create();
         Image::factory(4)->create();
         Product::factory(4)->create();

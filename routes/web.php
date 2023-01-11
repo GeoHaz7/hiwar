@@ -17,13 +17,12 @@ use App\Http\Controllers\Select2Controller;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+require_once 'frontend.php';
+
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(
     ['middleware' => 'auth'],
@@ -101,6 +100,7 @@ Route::group(
         //show categories Data Ajax
         Route::get('/vendors/ajax/show/{id}', [Select2Controller::class, 'showVendorDataAjax'])->name('vendors.showDataAjax');
     }
+
 
 
 );

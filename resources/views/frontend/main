@@ -1,0 +1,124 @@
+        <main>
+            <!-- hero-slider-section -->
+            <section class="hero-slider-section">
+                <div class="container">
+                    <div id="hero-carouser" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="assets/img/slider-img1.png" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/img/slider-img2.png" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/img/slider-img3.png" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#hero-carouser"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#hero-carouser"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </section><!-- hero-slider-section end -->
+
+            <!-- about-us-section -->
+            <section class="about-us-section light-gray-bg">
+                <div class="container">
+                    <div class="row g-md-5 g-3 align-items-center">
+                        <div class="col-lg-8">
+                            <div class="content-text">
+                                <h3>من نحن</h3>
+                                <h2>مؤسسة حوار للتنمية المجتمعية</h2>
+                                <p>مؤسسة حوار للتنمية المجتمعية هي مؤسسة أهلية فلسطينية غير ربحية، متخصصة في العمل
+                                    الشبابي والنسوي. تأسست عام 2010 من قبل مجموعة فلسطينية شابة، و تركز في برامجها على
+                                    تدريب وتمكين الشباب والنساء من أجل تعزيز مشاركتهم في بناء مجتمع فلسطيني تسوده
+                                    العدالة الاجتماعية والديمقراطية والمساواة وتدعيم لغة الحوار ونبذ العنف المبني على
+                                    النوع الاجتماعي. ومحاولة المساهمة في الحد من الفقر في فلسطين بمساعدة الفئات المهمشة
+                                    والفقيرة. ترخصت مؤسسة حوار للتنمية المجتمعية في عام 2011 وهي مسجلة رسميا لدى وزارة
+                                    الداخلية الفلسطينية. تستهدف مؤسستنا قطاعي المرأة والشباب بشكل مباشر والأطفال وكبار
+                                    السن بشكل غير مباشر.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 order-lg-1 order-first">
+                            <div class="img-box" dir="ltr">
+                                <img src="assets/img/aboutus-img.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- about-us-section end -->
+
+            <!-- about-company-section -->
+            <section class="about-company-section">
+                <div class="container">
+                    <div class="row section-title">
+                        <h3>تعرفوا أكثر علينا</h3>
+                        <h2>تعريف ولمحة عن المؤسسة</h2>
+                    </div>
+                    <div class="row g-5">
+                        <div class="col-lg-4">
+                            <div class="company-option">
+                                <p>رؤيتنا</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="company-option">
+                                <p>برامجنا</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="company-option">
+                                <p>رسالتنا</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- about-company-section end -->
+
+            <!-- contact-us-section -->
+            <section class="contact-us-section light-gray-bg">
+                <div class="container">
+                    <div class="row justify-content-between">
+                        <div class="img-wrap h-100">
+                            <div class="img-box h-100">
+                                <img class="img-fluid" src="assets/img/about-company-croped-img.png" alt="">
+                            </div>
+                        </div>
+                        <div class="form-wrap">
+                            <div class="section-title">
+                                <h3>تعزيز مشاركتهم بناء مجتمع فلسطيني</h3>
+                                <h2>بناء مجتمع فلسطيني</h2>
+                            </div>
+                            <div class="contact-form">
+                                <form action="#">
+                                    <div class="input-group-column2">
+                                        <div class="input-group">
+                                            <label for="#">الحوار الاجتماعي</label>
+                                            <input type="text">
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="#">المبني على</label>
+                                            <input type="text">
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="#">ونبذ العنف</label>
+                                        <textarea></textarea>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="submit" value="إرسال">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>

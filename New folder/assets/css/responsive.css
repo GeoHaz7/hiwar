@@ -1,0 +1,137 @@
+/*For bigger screen then normal 1500px desktop*/
+
+@media (min-width: 1400px) {
+  .contact-us-section .container .row {
+    margin-right: -100px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1130px;
+  }
+}
+
+
+/*For bigger screen then normal 960px desktop*/
+@media only screen and (max-width: 1199px) {
+
+  .about-us-section .content-text p {
+    margin-left: 0;
+  }
+  .about-us-section .img-box img {
+    max-width: 100%;
+    margin: 0;
+    position: static;
+  }
+  
+  /* hero-slider-section */
+  .hero-slider-section {
+    --arrow-position: 40px;
+  }
+
+}
+
+@media only screen and (max-width: 991px) {
+
+  /* mobile-menu */
+  .header-bottom {
+    position: fixed;
+    background: #fff;
+    z-index: 100;
+    flex-wrap: wrap;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    text-align: center;
+    max-width: 300px;
+    width: 300px;
+    box-shadow: var(--shadow__light);
+    transform: translateX(-120%);
+    transition: 0.3s;
+  }
+  .header-bottom-start {
+    margin-right: auto;
+  }
+  .main-menu {
+    padding-top: 30px;
+    flex-direction: column;
+    width: 100%;
+  }
+  .header-bottom.active {
+    transform: translateY(0);
+  }
+  .main-menu li {
+    margin: 0;
+    margin: 10px 0;
+  }
+  .menu-closer {
+    font-size: 26px;
+    margin-left: auto;
+    cursor: pointer;
+    position: absolute;
+    top: 43px;
+    right: 21px;
+  }
+
+  /* about-us-section */
+  .about-us-section .img-box {
+    display: flex;
+    justify-content: center;
+  }
+  .about-us-section h2 ,
+  .about-us-section h3 {
+    text-align: center;
+  }
+
+  /* about-company-section */
+  .contact-us-section .img-wrap {
+    width: 100%;
+  }
+  .contact-us-section .img-wrap .img-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .contact-us-section .form-wrap {
+    width: 100%;
+  }
+  .contact-us-section .section-title h2,
+  .contact-us-section .section-title h3 {
+    text-align: center;
+  }
+
+}
+
+@media only screen and (max-width: 767px) {
+
+
+}
+
+@media only screen and (max-width: 575px) {
+
+  /* hero-slider-section */
+  .hero-slider-section {
+    --arrow-position: 0px;
+  }
+
+  /* contact-us-section */
+  .contact-us-section .form-wrap {
+    padding: 60px 20px 43px;
+  }
+  .contact-us-section .img-wrap img {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+
+  .input-group-column2 {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 0;
+  }
+
+
+}
+
+

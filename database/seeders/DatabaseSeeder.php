@@ -76,17 +76,33 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Vendor::factory(4)->create();
+
+        Page::create([
+            'title' => 'من نحن',
+            'brief' => 'مؤسسة حوار للتنمية المجتمعية',
+            'description' => 'مؤسسة حوار للتنمية المجتمعية هي مؤسسة أهلية فلسطينية غير ربحية، متخصصة في العمل الشبابي والنسوي. تأسست عام 2010 من قبل مجموعة فلسطينية شابة، و تركز في برامجها على تدريب وتمكين الشباب والنساء من أجل تعزيز مشاركتهم في بناء مجتمع فلسطيني تسوده العدالة الاجتماعية والديمقراطية والمساواة وتدعيم لغة الحوار ونبذ العنف المبني على النوع الاجتماعي. ومحاولة المساهمة في الحد من الفقر في فلسطين بمساعدة الفئات المهمشة والفقيرة. ترخصت مؤسسة حوار للتنمية المجتمعية في عام 2011 وهي مسجلة رسميا لدى وزارة الداخلية الفلسطينية. تستهدف مؤسستنا قطاعي المرأة والشباب بشكل مباشر والأطفال وكبار السن بشكل غير مباشر.',
+            'status' => 1,
+            'sideMenu' => 1,
+            'feature_image' => 5,
+            'page_slug' => Str::slug('من نحن'),
+        ]);
+
         $pages = Page::factory(4)->create();
 
         foreach ($pages as $key => $value) {
-            
+
             $pages[$key]->page_slug =
                 Str::slug($pages[$key]->title);
             $pages[$key]->save();
-            
         }
         News::factory(4)->create();
         Image::factory(4)->create();
+
+        Image::create([
+            'original_filename' => 'aboutUs0001.png',
+            'filename' => 'aboutus-img.png',
+        ]);
+
         Product::factory(4)->create();
         Album::factory(4)->create();
 

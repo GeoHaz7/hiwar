@@ -16,6 +16,7 @@ class Page extends Model
         'description',
         'feature_image',
         'status',
+        'sideMenu',
         'page_slug',
     ];
 

@@ -21,6 +21,7 @@ class PageFactory extends Factory
             'brief' => fake()->sentence(12, true),
             'description' => fake()->sentence(25),
             'status' => fake()->boolean(),
+            'sideMenu' => fake()->boolean(),
         ];
     }
 }

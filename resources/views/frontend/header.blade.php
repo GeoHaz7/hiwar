@@ -77,9 +77,7 @@
                       <li>
                           <a href="/">الرئيسية</a>
                       </li>
-                      <li>
-                          <a href="javascript:void(0)">من نحن</a>
-                      </li>
+
                       @foreach ($pages as $page)
                           <li>
                               <a href="/front/page/{{ $page->page_slug }}">{{ $page->title }}</a>

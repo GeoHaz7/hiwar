@@ -32,7 +32,8 @@ class AppServiceProvider extends ServiceProvider
 
         ///get file name of logged in user
         view()->composer('*', function ($view) {
-            $pages = Page::select('title', 'page_slug')->get();
+
+            $pages = Page::select('title', 'page_slug', 'brief', 'description', 'feature_image')->get();
 
             view()->share('pages', $pages);
 

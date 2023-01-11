@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('feature_image')->nullable();
             $table->boolean('status');
+            $table->boolean('sideMenu');
             $table->string('page_slug')->nullable();
             $table->softDeletes();
             $table->timestamps();

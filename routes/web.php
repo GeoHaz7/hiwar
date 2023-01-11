@@ -42,6 +42,7 @@ Route::group(
         Route::get('/page/create', [App\Http\Controllers\PagesController::class, 'create'])->name('page.create');
         Route::post('/page/store', [App\Http\Controllers\PagesController::class, 'store'])->name('page.store');
         Route::post('/page/switch/{id}', [App\Http\Controllers\PagesController::class, 'switch'])->name('page.switch');
+        Route::post('/page/switchMenu/{id}', [App\Http\Controllers\PagesController::class, 'switchMenu'])->name('page.switchMenu');
         Route::get('/page/edit/{id}', [App\Http\Controllers\PagesController::class, 'edit'])->name('page.edit');
         Route::post('/page/update/{id}', [App\Http\Controllers\PagesController::class, 'update'])->name('page.update');
         Route::delete('/page/destroy/{id}', [App\Http\Controllers\PagesController::class, 'destroy'])->name('page.destroy');

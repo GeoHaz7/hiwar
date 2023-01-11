@@ -19,7 +19,7 @@ class PagesController extends Controller
     public function index()
     {
 
-        $page = Page::select('page_id', 'title', 'brief', 'description', 'filename', 'status')->leftjoin('images', 'images.image_id', '=', 'pages.feature_image');;
+        $page = Page::select('page_id', 'title', 'brief', 'description', 'filename', 'status', 'sideMenu')->leftjoin('images', 'images.image_id', '=', 'pages.feature_image');;
 
 
         return DataTables::eloquent($page)
@@ -58,6 +58,7 @@ class PagesController extends Controller
             'brief' => $request->pageBrief,
             'description' => $request->pageDescription,
             'status' => 1,
+            'sideMenu' => 1,
             'feature_image' => $id,
             'page_slug' => Str::slug($request->pageTitle),
         ]);
@@ -124,7 +125,10 @@ class PagesController extends Controller
             'brief' => $request->pageBrief,
             'description' => $request->pageDescription,
             'status' => 1,
+            'sideMenu' => 1,
             'feature_image' => $idd,
+            'page_slug' => Str::slug($request->pageTitle),
+
         ]);
 
         // dd($request->all());
@@ -161,6 +165,16 @@ class PagesController extends Controller
 
         $page->update([
             'status' => !$page->status,
+        ]);
+
+        return response()->json('success');
+    }
+    public function switchMenu(Page $page, $id)
+    {
+        $page = Page::where('page_id', $id)->first();
+
+        $page->update([
+            'sideMenu' => !$page->status,
         ]);
 
         return response()->json('success');

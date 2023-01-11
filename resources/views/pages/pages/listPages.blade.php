@@ -13,6 +13,7 @@
                     <th>Title</th>
                     <th>Brief</th>
                     <th>Status</th>
+                    <th>Show In Menu</th>
                     <th><a class="btn btn-primary" href="{{ Route('page.create') }}">Add</a></th>
                 </tr>
             </thead>
@@ -56,6 +57,16 @@
                                 checked + '></div>';
 
                         }
+                    }, {
+                        "data": "sideMenu",
+                        render: function(data, type, row, meta) {
+                            var checked = (data) ? "checked" : "";
+                            return '<div class="form-switch"><input data-id="' +
+                                row.page_id +
+                                '" class="form-check-input" type="checkbox" role="switch" id="menuSwitch" ' +
+                                checked + '></div>';
+
+                        }
                     },
                     {
                         "data": "page_id",
@@ -83,30 +94,78 @@
                     showCancelButton: true,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                    $.ajax({
-                        url: url,
-                        type: "POST",
-                        data: {
-                            '_token': '{{ csrf_token() }}'
-                        },
-                        success: function(response) {
-                            if (response == 'success') {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: response,
-                                    showDenyButton: false,
-                                    showCancelButton: false,
-                                    confirmButtonText: 'Yes'
-                                }).then((result) => {
-                                    if (response == 'success') {
-                                        table.ajax.reload(null);
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: url,
+                            type: "POST",
+                            data: {
+                                '_token': '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                if (response == 'success') {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: response,
+                                        showDenyButton: false,
+                                        showCancelButton: false,
+                                        confirmButtonText: 'Yes'
+                                    }).then((result) => {
+                                        if (response == 'success') {
+                                            table.ajax.reload(null);
 
-                                    }
-                                });
-                            }
-                        },
-                        error: function(err) {}
-                    });
+                                        }
+                                    });
+                                }
+                            },
+                            error: function(err) {}
+                        });
+                    } else {
+                        table.ajax.reload(null);
+                    }
+                });
+            });
+
+            //menu status
+            $('#example').on('change', '#menuSwitch', function(e) {
+                var id = $(this).data('id');
+                var url = "{{ route('page.switchMenu', ':id') }}";
+                url = url.replace(':id', id);
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Are you sure ?',
+                    showDenyButton: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            url: url,
+                            type: "POST",
+                            data: {
+                                '_token': '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                if (response == 'success') {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: response,
+                                        showDenyButton: false,
+                                        showCancelButton: false,
+                                        confirmButtonText: 'Yes'
+                                    }).then((result) => {
+                                        if (response == 'success') {
+                                            table.ajax.reload(null);
+
+                                        }
+                                    });
+                                }
+                            },
+                            error: function(err) {}
+                        });
+                    } else {
+                        table.ajax.reload(null);
+                    }
                 });
             });
 
@@ -123,18 +182,21 @@
                     showCancelButton: true,
                     confirmButtonText: 'Yes'
                 }).then((result) => {
-                    $.ajax({
-                        url: url,
-                        type: "DELETE",
-                        data: {
-                            '_token': '{{ csrf_token() }}'
-                        },
-                        success: function(response) {
-                            table.ajax.reload(null);
-                            if (response == 'success') {}
-                        },
-                        error: function(err) {}
-                    });
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            url: url,
+                            type: "DELETE",
+                            data: {
+                                '_token': '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                table.ajax.reload(null);
+                                if (response == 'success') {}
+                            },
+                            error: function(err) {}
+                        });
+                    }
                 });
             });
             // edit a record

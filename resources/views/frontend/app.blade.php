@@ -73,7 +73,23 @@
         integrity="sha512-72WD92hLs7T5FAXn3vkNZflWG6pglUDDpm87TeQmfSg8KnrymL2G30R7as4FmTwhgu9H7eSzDCX3mjitSecKnw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="{{ url('assets/js/main.js') }}"></script>
+
+    @yield('js')
+
+    <script>
+        var url = "{{ route('changeLangFront') }}";
+
+        $(".langAR").click(function() {
+            window.location.href = url + "?lang=ar";
+        });
+        $(".langEN").click(function() {
+            window.location.href = url + "?lang=en";
+        });
+    </script>
 </body>
+
+
+
 
 </html>

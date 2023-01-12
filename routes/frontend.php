@@ -8,6 +8,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EditionController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,10 +33,12 @@ Route::group(
         Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('home');
         Route::get('/contact-us', [App\Http\Controllers\FrontendController::class, 'contact'])->name('front.contact');
         Route::get('/front/page/{slug?}', function ($slug) {
-            $page = Page::where('page_slug', $slug)
+            $page = Page::where('page_slug', $slug)->where('status', 1)
                 ->firstOrFail();
 
             return View::make('frontend.showPage')->with('page', $page);
         });
+        //change langue route
+        Route::get('/lang/toggle', [App\Http\Controllers\FrontendController::class, 'toggleLang'])->name('changeLangFront');
     }
 );

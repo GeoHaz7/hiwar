@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VideoAlbumController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\Select2Controller;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\VideoAlbumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,10 @@ Route::group(
 
         //get categories Data Ajax
         Route::get('/vendors/ajax/', [Select2Controller::class, 'vendorDataAjax'])->name('vendors.dataAjax');
+
+        //change langue route
+        Route::get('lang/change/back', [LanguageController::class, 'changeBack'])->name('changeLangBack');
+
 
         //show categories Data Ajax
         Route::get('/vendors/ajax/show/{id}', [Select2Controller::class, 'showVendorDataAjax'])->name('vendors.showDataAjax');

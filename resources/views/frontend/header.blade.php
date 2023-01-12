@@ -27,10 +27,10 @@
                   <div class="topbar-start">
                       <ul class="lan-switch">
                           <li>
-                              <a href="javascript:void(0)">العربية</a>
+                              <a class="langAR" href="javascript:void(0)">العربية</a>
                           </li>
                           <li>
-                              <a href="javascript:void(0)">English</a>
+                              <a class="langEN" href="javascript:void(0)">English</a>
                           </li>
                       </ul>
                   </div>
@@ -70,12 +70,12 @@
                   <div class="menu-closer d-lg-none d-block" id="menuClose">&times;</div>
                   <div class="header-bottom-start">
                       <a href="javascript:void(0)" href="javascript:void(0)">
-                          <img src="assets/img/site-logo.png" alt="">
+                          <img src="{{ url('assets/img/site-logo.png') }}" alt="">
                       </a>
                   </div>
                   <ul class="main-menu" id="mainMenu">
                       <li>
-                          <a href="/">الرئيسية</a>
+                          <a href="/">{{ __('generalFront.mainPage') }}</a>
                       </li>
 
                       @foreach ($pages as $page)
@@ -91,7 +91,7 @@
                       <li>
                           <a href="javascript:void(0)" class="logo d-block" type="button" data-bs-toggle="modal"
                               data-bs-target="#search-modal">
-                              <img src="assets/img/search-icon.png" alt="">
+                              <img src="{{ URL('assets/img/search-icon.png') }}" alt="">
                           </a>
                       </li>
                   </ul>

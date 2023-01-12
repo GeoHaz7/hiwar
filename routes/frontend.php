@@ -32,6 +32,8 @@ Route::group(
     function () {
         Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('home');
         Route::get('/contact-us', [App\Http\Controllers\FrontendController::class, 'contact'])->name('front.contact');
+        Route::get('/shop', [App\Http\Controllers\CartController::class, 'index'])->name('front.shop');
+        Route::get('/shop/cart', [App\Http\Controllers\CartController::class, 'cart'])->name('front.cart');
         Route::get('/front/page/{slug?}', function ($slug) {
             $page = Page::where('page_slug', $slug)->where('status', 1)
                 ->firstOrFail();

@@ -66,7 +66,7 @@
               </div>
           </div>
           <div class="header-bottom" id="sidebarMenu">
-              <div class="container d-flex justify-content-between align-items-center flex-wrap">
+              <div class="container d-flex justify-content-between align-items-center flex-wrap ">
                   <div class="menu-closer d-lg-none d-block" id="menuClose">&times;</div>
                   <div class="header-bottom-start">
                       <a href="javascript:void(0)" href="javascript:void(0)">
@@ -85,6 +85,9 @@
                               </li>
                           @endif
                       @endforeach
+                      <li>
+                          <a href="{{ route('front.shop') }}">منتجاتنا</a>
+                      </li>
                       <li>
                           <a href="{{ route('front.contact') }}">إتصل بنا</a>
                       </li>

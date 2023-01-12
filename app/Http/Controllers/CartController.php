@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use stdClass;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class CartController extends Controller
 {
@@ -13,7 +14,7 @@ class CartController extends Controller
         $products = Product::select('product_id', 'name', 'price', 'vendor_id', 'filename', 'status', 'description')
             ->leftjoin('images', 'images.image_id', '=', 'products.feature_image');
 
-        return view('pages.products.test', ['product' => $products]);
+        return view('frontend.shop', ['product' => $products]);
     }
 
     public function addToCart(Request $request)
@@ -63,11 +64,12 @@ class CartController extends Controller
         }
     }
 
-    public function show(Request $request)
+    public function cart(Request $request)
     {
         $cart = json_decode($request->cookie('cart'));
 
         $products = [];
+        $total = 0;
 
         foreach ($cart as $key => $value) {
             $loopProduct = Product::find($value->product_id);
@@ -76,13 +78,19 @@ class CartController extends Controller
             $product->product_id = $value->product_id;
             $product->name = $loopProduct->name;
             $product->price = $loopProduct->price;
+            $product->description = $loopProduct->description;
             $product->thumbnail = $loopProduct->thumbnail->filename;
             $product->quantiy = $value->quantity;
 
             array_push($products, $product);
         }
 
+        foreach ($products as $key => $value) {
+            $productTotal = $value->quantiy * $value->price;
+            $total = $total + $productTotal;
+        }
 
-        return view('pages.products.testList', ['product' => $products]);
+
+        return view('frontend.cartList', ['products' => $products, 'total' => $total]);
     }
 }

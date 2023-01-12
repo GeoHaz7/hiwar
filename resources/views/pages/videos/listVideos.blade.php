@@ -3,15 +3,15 @@
 @section('content')
     <div class="container col-10 py-3">
 
-        <h2 class="headerText">Vendor Account List</h2>
+        <h2 class="headerText">{{ __('generalBack.videoList') }}</h2>
 
         <table id="example" class="display stripe table table-hover compact dataTable dtr-inline cell-border collapsed"
             style="width:100%">
             <thead>
                 <tr>
-                    <th>Video Name</th>
-                    <th>Video Link</th>
-                    <th><button id="addLink" class="btn btn-primary">Add</button></th>
+                    <th>{{ __('generalBack.videoName') }}</th>
+                    <th>{{ __('generalBack.videoLink') }}</th>
+                    <th><button id="addLink" class="btn btn-primary">{{ __('generalBack.add') }}</button></th>
                 </tr>
             </thead>
 
@@ -70,10 +70,10 @@
 
             $('#example').on('click', '#addLink', function(e) {
                 Swal.fire({
-                    title: 'Add Video Link',
-                    html: `<input type="text" id="videoName" class="swal2-input" placeholder="Video Name">
-  <input type="text" id="videoLink" class="swal2-input" placeholder="Video Link">`,
-                    confirmButtonText: 'Add Link',
+                    title: '{{ __('generalBack.addVideoLink') }}',
+                    html: `<input type="text" id="videoName" class="swal2-input" placeholder="{{ __('generalBack.videoName') }}">
+  <input type="text" id="videoLink" class="swal2-input" placeholder="{{ __('generalBack.videoLink') }}">`,
+                    confirmButtonText: '{{ __('generalBack.addLink') }}',
                     focusConfirm: false,
                     preConfirm: () => {
                         const videoName = Swal.getPopup().querySelector('#videoName').value

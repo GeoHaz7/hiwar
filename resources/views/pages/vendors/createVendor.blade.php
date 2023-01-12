@@ -3,7 +3,7 @@
 @section('content')
     <div class="container col-10">
         <div>
-            <h2 class="headerText">Add A Vendor Account</h2>
+            <h2 class="headerText">{{ __('generalBack.addVendorAccount') }}</h2>
             {{-- <p class="text-center">Get started with your free account</p> --}}
 
             <form id="vendorForm" class="mt-5 ">
@@ -13,7 +13,7 @@
                             <img class="mx-auto mb-3" id="file-ip-1-preview">
                         </div>
 
-                        <label for="file-ip-1">Upload Image</label>
+                        <label for="file-ip-1">{{ __('generalBack.uploadImage') }}</label>
                         <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
                     </div>
                 </div>
@@ -21,22 +21,22 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user-secret"></i> </span>
                     </div>
-                    <input id="vendorUsername" name="vendorUsername" class="form-control" placeholder="Username"
-                        type="text">
+                    <input id="vendorUsername" name="vendorUsername" class="form-control"
+                        placeholder="{{ __('generalBack.username') }}" type="text">
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input id="vendorFullName" name="vendorFullName" class="form-control" placeholder="Full name"
-                        type="text">
+                    <input id="vendorFullName" name="vendorFullName" class="form-control"
+                        placeholder="{{ __('generalBack.fullname') }}" type="text">
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                     </div>
-                    <input id="vendorEmail" name="vendorEmail" class="form-control" placeholder="Email address"
-                        type="email">
+                    <input id="vendorEmail" name="vendorEmail" class="form-control"
+                        placeholder="{{ __('generalBack.emailAddress') }}" type="email">
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -46,21 +46,22 @@
                         <option value="+970" selected="">+970</option>
                         <option value="+972">+972</option>
                     </select>
-                    <input id="vendorPhone" name="vendorPhone" class="form-control" placeholder="Phone number"
-                        type="text">
+                    <input id="vendorPhone" name="vendorPhone" class="form-control"
+                        placeholder="{{ __('generalBack.phoneNumber') }}" type="text">
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-home"></i> </span>
                     </div>
-                    <input id="vendorAddress" name="vendorAddress" class="form-control" placeholder="Address"
-                        type="text">
+                    <input id="vendorAddress" name="vendorAddress" class="form-control"
+                        placeholder="{{ __('generalBack.address') }}" type="text">
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-pencil"></i> </span>
                     </div>
-                    <input id="vendorBio" name="vendorBio" class="form-control" placeholder="Bio" type="text">
+                    <input id="vendorBio" name="vendorBio" class="form-control" placeholder="{{ __('generalBack.bio') }}"
+                        type="text">
                 </div> <!-- form-group// -->
                 {{-- <div class="form-group input-group">
                     <div class="input-group-prepend">
@@ -77,18 +78,19 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input id="vendorPassword" name="vendorPassword" class="form-control" placeholder="Create password"
-                        type="password">
+                    <input id="vendorPassword" name="vendorPassword" class="form-control"
+                        placeholder="{{ __('generalBack.createPassword') }}" type="password">
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
                     <input id="vendorPassword_confirm" name="vendorPassword_confirm" class="form-control"
-                        placeholder="Repeat password" type="password">
+                        placeholder="{{ __('generalBack.repeatPassword') }}" type="password">
                 </div> <!-- form-group// -->
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Create Vendor Account </button>
+                    <button type="submit" class="btn btn-primary btn-block">{{ __('generalBack.createVendorAccount') }}
+                    </button>
                 </div> <!-- form-group// -->
                 {{-- <p class="text-center">Have an account? <a href="">Log In</a> </p> --}}
             </form>

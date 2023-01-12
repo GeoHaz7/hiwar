@@ -3,14 +3,14 @@
 @section('content')
     <div class="container col-10 py-3">
 
-        <h2 class="headerText">Options List</h2>
+        <h2 class="headerText">{{ __('generalBack.optionsList') }}</h2>
 
         <table id="example" class="display stripe table table-hover compact dataTable dtr-inline cell-border collapsed "
             style="width:100%">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th width="450">Value</th>
+                    <th>{{ __('generalBack.name') }}</th>
+                    <th width="450">{{ __('generalBack.value') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -27,7 +27,7 @@
 
             var table = $('#example').DataTable({
                 "ajax": "{{ route('option.data') }}",
-                "order" : [2 , 'ASC'],
+                "order": [2, 'ASC'],
                 "columns": [{
                         "data": "name",
                         render: function(data, type, row, meta) {
@@ -72,19 +72,19 @@
                             var text = '';
                             switch (row.name) {
                                 case ('website_name'):
-                                    text = 'website name';
+                                    text = '{{ __('generalBack.websiteName') }}';
                                     break;
 
                                 case ('website_description'):
-                                    text = 'website description';
+                                    text = '{{ __('generalBack.websiteDescription') }}';
                                     break;
 
                                 case ('website_lang'):
-                                    text = 'default language';
+                                    text = '{{ __('generalBack.websiteDefaultLang') }}';
                                     break;
 
                                 case ('website_photo'):
-                                    text = 'website logo';
+                                    text = '{{ __('generalBack.websiteLogo') }}';
                                     break;
                             }
                             return '<button class="btn btn-primary edit" data-id="' + data +
@@ -117,7 +117,8 @@
                         var websiteLogo = response.data[3].value;
 
                         (async () => {
-                            if (optionName == 'default language') {
+                            if (optionName ==
+                                '{{ __('generalBack.websiteDefaultLang') }}') {
 
                                 const inputOptions = new Promise((resolve) => {
                                     resolve({
@@ -130,7 +131,7 @@
                                 const {
                                     value: lang
                                 } = await Swal.fire({
-                                    title: 'Select Default Language',
+                                    title: '{{ __('generalBack.selectDefaultLanguage') }}',
                                     input: 'radio',
                                     inputValue: websiteLang,
                                     inputOptions: inputOptions,
@@ -172,11 +173,12 @@
                                     });
                                 }
 
-                            } else if (optionName == 'website logo') {
+                            } else if (optionName ==
+                                '{{ __('generalBack.websiteLogo') }}') {
                                 const {
                                     value: file
                                 } = await Swal.fire({
-                                    title: 'Select Logo',
+                                    title: '{{ __('generalBack.selectLogo') }}',
                                     input: 'file',
                                     showCancelButton: true,
                                     inputAttributes: {
@@ -233,11 +235,12 @@
 
                                 }
 
-                            } else if (optionName == 'website description') {
+                            } else if (optionName ==
+                                '{{ __('generalBack.websiteDescription') }}') {
                                 const {
                                     value: description
                                 } = await Swal.fire({
-                                    title: 'Edit The Website Name',
+                                    title: '{{ __('generalBack.editTheWebsiteDescription') }}',
                                     input: 'textarea',
                                     inputValue: websiteDescription,
                                     inputPlaceholder: 'Type your message here...',
@@ -279,11 +282,12 @@
                                     });
                                 }
 
-                            } else if (optionName == 'website name') {
+                            } else if (optionName ==
+                                '{{ __('generalBack.websiteName') }}') {
                                 const {
                                     value: name
                                 } = await Swal.fire({
-                                    title: 'Edit The Website Name',
+                                    title: '{{ __('generalBack.editTheWebsiteName') }}',
                                     input: 'text',
                                     inputValue: websiteName,
                                     inputPlaceholder: 'Enter New Webiste Name',

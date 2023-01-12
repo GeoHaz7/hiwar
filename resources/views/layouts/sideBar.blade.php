@@ -7,7 +7,7 @@
     <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
             <div class="sidebar-brand">
-                <a href="#">pro sidebar</a>
+                <a href="#">{{ __('generalBack.sidebarTitle') }}</a>
                 <div id="close-sidebar">
                     <i class="fas fa-times"></i>
                 </div>
@@ -48,25 +48,25 @@
             <div class="sidebar-menu">
                 <ul>
                     <li class="header-menu">
-                        <span>General</span>
+                        <span>{{ __('generalBack.general') }}</span>
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
                             <i class="fa fa-person"></i>
-                            <span>Vendors</span>
+                            <span>{{ __('generalBack.vendors') }}</span>
                             {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
                                 <li>
-                                    <a href="{{ route('vendor.list') }}">All Vendors
+                                    <a href="{{ route('vendor.list') }}">{{ __('generalBack.allVendors') }}
                                         {{-- <span
                                          class="badge badge-pill badge-success"
                                          >Pro</span> --}}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('vendor.create') }}">Add Vendor
+                                    <a href="{{ route('vendor.create') }}">{{ __('generalBack.addVendor') }}
                                         {{-- <span class="badge badge-pill badge-success">Pro</span> --}}
                                     </a>
                                 </li>
@@ -76,20 +76,20 @@
                     <li class="sidebar-dropdown">
                         <a href="#">
                             <i class="fa fa-scroll"></i>
-                            <span>Pages</span>
+                            <span>{{ __('generalBack.pages') }}</span>
                             {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
                                 <li>
-                                    <a href="{{ route('page.list') }}">All Pages
+                                    <a href="{{ route('page.list') }}">{{ __('generalBack.allPages') }}
                                         {{-- <span
                                          class="badge badge-pill badge-success"
                                          >Pro</span> --}}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('page.create') }}">Add Page
+                                    <a href="{{ route('page.create') }}">{{ __('generalBack.addPage') }}
                                         {{-- <span class="badge badge-pill badge-success">Pro</span> --}}
                                     </a>
                                 </li>
@@ -99,20 +99,20 @@
                     <li class="sidebar-dropdown">
                         <a href="#">
                             <i class="fa fa-box"></i>
-                            <span>Products</span>
+                            <span>{{ __('generalBack.products') }}</span>
                             {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
                                 <li>
-                                    <a href="{{ route('product.list') }}">All Products
+                                    <a href="{{ route('product.list') }}">{{ __('generalBack.allProducts') }}
                                         {{-- <span
                                          class="badge badge-pill badge-success"
                                          >Pro</span> --}}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('product.create') }}">Add Product
+                                    <a href="{{ route('product.create') }}">{{ __('generalBack.addProduct') }}
                                         {{-- <span class="badge badge-pill badge-success">Pro</span> --}}
                                     </a>
                                 </li>
@@ -122,20 +122,20 @@
                     <li class="sidebar-dropdown">
                         <a href="#">
                             <i class="far fa-newspaper"></i>
-                            <span>News</span>
+                            <span>{{ __('generalBack.news') }}</span>
                             {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
                                 <li>
-                                    <a href="{{ route('news.list') }}">All News
+                                    <a href="{{ route('news.list') }}">{{ __('generalBack.allNews') }}
                                         {{-- <span
                                          class="badge badge-pill badge-success"
                                          >Pro</span> --}}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('news.create') }}">Add News
+                                    <a href="{{ route('news.create') }}">{{ __('generalBack.addNews') }}
                                         {{-- <span class="badge badge-pill badge-success">Pro</span> --}}
                                     </a>
                                 </li>
@@ -145,20 +145,20 @@
                     <li class="sidebar-dropdown">
                         <a href="#">
                             <i class="far fa-image"></i>
-                            <span>Album</span>
+                            <span>{{ __('generalBack.album') }}</span>
                             {{-- <span class="badge badge-pill badge-warning">New</span> --}}
                         </a>
                         <div class="sidebar-submenu">
                             <ul>
                                 <li>
-                                    <a href="{{ route('album.list') }}">All Album
+                                    <a href="{{ route('album.list') }}">{{ __('generalBack.allAlbums') }}
                                         {{-- <span
                                          class="badge badge-pill badge-success"
                                          >Pro</span> --}}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('album.create') }}">Add Album
+                                    <a href="{{ route('album.create') }}">{{ __('generalBack.addAlbum') }}
                                         {{-- <span class="badge badge-pill badge-success">Pro</span> --}}
                                     </a>
                                 </li>
@@ -166,26 +166,21 @@
                         </div>
                     </li>
                     <li class="header-menu">
-                        <span>Extra</span>
+                        <span>{{ __('generalBack.extra') }}</span>
                     </li>
                     <li>
                         </a>
 
                         <a href="{{ route('videoAlbum.list') }}">
                             <i class="fa fa-video"></i>
-                            <span>Videos</span>
+                            <span>{{ __('generalBack.videos') }}</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('album.list') }}">
-                            <i class="fa fa-folder"></i>
-                            <span>Albums</span>
-                        </a>
-                    </li>
+
                     <li>
                         <a href="{{ route('option.list') }}">
                             <i class="fa fa-book"></i>
-                            <span>Options</span>
+                            <span>{{ __('generalBack.options') }}</span>
                             <span class="badge badge-pill badge-primary">Beta</span>
                         </a>
                     </li>
@@ -203,9 +198,8 @@
                 <i class="fa fa-envelope"></i>
                 <span class="badge badge-pill badge-success notification">7</span>
             </a>
-            <a href="#">
-                <i class="fa fa-cog"></i>
-                <span class="badge-sonar"></span>
+            <a href="{{ route('changeLangBack') }}">
+                <i class="bi bi-translate"></i>
             </a>
             <a href="{{ route('logout') }}"
                 onclick="event.preventDefault();

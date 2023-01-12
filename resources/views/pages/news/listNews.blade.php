@@ -3,17 +3,17 @@
 @section('content')
     <div class="container col-10 py-3">
 
-        <h2 class="headerText">News List</h2>
+        <h2 class="headerText">{{ __('generalBack.newsList') }}</h2>
 
         <table id="example" class="display stripe table table-hover compact dataTable dtr-inline cell-border collapsed"
             style="width:100%">
             <thead>
                 <tr>
-                    <th>Featured Image</th>
-                    <th>Title</th>
-                    <th>Brief</th>
-                    <th>Category</th>
-                    <th><a class="btn btn-primary" href="{{ Route('news.create') }}">Add</a></th>
+                    <th>{{ __('generalBack.featredImage') }}</th>
+                    <th>{{ __('generalBack.title') }}</th>
+                    <th>{{ __('generalBack.brief') }}</th>
+                    <th>{{ __('generalBack.category') }}</th>
+                    <th><a class="btn btn-primary" href="{{ Route('news.create') }}">{{ __('generalBack.add') }}</a></th>
                 </tr>
             </thead>
 

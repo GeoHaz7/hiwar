@@ -3,7 +3,7 @@
 @section('content')
     <div class="container col-10 py-3">
         <div>
-            <h2 class="headerText ">Add A Album</h2>
+            <h2 class="headerText ">{{ __('generalBack.addAlbum') }}</h2>
             {{-- <p class="text-center">Get started with your free account</p> --}}
 
             <form id="albumForm" class="mt-5 ">
@@ -13,7 +13,7 @@
                             <img class="mx-auto mb-3" id="file-ip-1-preview">
                         </div>
 
-                        <label for="file-ip-1">Upload Image</label>
+                        <label for="file-ip-1">{{ __('generalBack.uploadImage') }}</label>
                         <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
                     </div>
                 </div>
@@ -22,7 +22,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-star"></i> </span>
                     </div>
-                    <input id="albumName" name="albumName" class="form-control" placeholder="Name" type="text">
+                    <input id="albumName" name="albumName" class="form-control" placeholder="{{ __('generalBack.name') }}"
+                        type="text">
                 </div> <!-- form-group// -->
 
 
@@ -33,12 +34,12 @@
                 <div class="dropzone mt-3" id="dropzone">
 
                     <div class="dz-default dz-message">
-                        <h4>Drop Files Here</h4>
+                        <h4>{{ __('generalBack.dropFilesHere') }}</h4>
                     </div>
                 </div>
 
                 <div class="form-group mt-3">
-                    <button type="submit" class="btn btn-primary btn-block"> Create Album </button>
+                    <button type="submit" class="btn btn-primary btn-block"> {{ __('generalBack.createAlbum') }} </button>
                 </div> <!-- form-group// -->
                 {{-- <p class="text-center">Have an account? <a href="">Log In</a> </p> --}}
             </form>

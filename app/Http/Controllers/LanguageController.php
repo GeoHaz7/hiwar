@@ -9,8 +9,13 @@ class LanguageController extends Controller
 {
     public function changeBack(Request $request)
     {
-        App::setLocale($request->lang);
-        session()->put('localeBack', $request->lang);
+        if (session()->get('localeBack') == 'en') {
+            App::setLocale('ar');
+            session()->put('localeBack', 'ar');
+        } else {
+            App::setLocale('en');
+            session()->put('localeBack', 'en');
+        }
 
         return redirect()->back();
     }

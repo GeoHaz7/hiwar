@@ -3,18 +3,18 @@
 @section('content')
     <div class="container col-10 py-3">
 
-        <h2 class="headerText">Vendor Account List</h2>
+        <h2 class="headerText">{{ __('generalBack.vendorAcountList') }}</h2>
 
         <table id="example" class="display stripe table table-hover compact dataTable dtr-inline cell-border collapsed"
             style="width:100%">
             <thead>
                 <tr>
-                    <th>Profile Image</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    <th>Status</th>
-                    <th><a class="btn btn-primary" href="{{ Route('vendor.create') }}">Add</a></th>
+                    <th>{{ __('generalBack.profileImage') }}</th>
+                    <th>{{ __('generalBack.name') }}</th>
+                    <th>{{ __('generalBack.address') }}</th>
+                    <th>{{ __('generalBack.phone') }}</th>
+                    <th>{{ __('generalBack.status') }}</th>
+                    <th><a class="btn btn-primary" href="{{ Route('vendor.create') }}">{{ __('generalBack.add') }}</a></th>
                 </tr>
             </thead>
 

@@ -3,16 +3,16 @@
 @section('content')
     <div class="container col-10 py-3">
 
-        <h2 class="headerText ">Album List</h2>
+        <h2 class="headerText ">{{ __('generalBack.albumList') }}</h2>
 
         <table id="example" class="display stripe table table-hover compact dataTable dtr-inline cell-border collapsed"
             style="width:100%;">
             <thead>
                 <tr>
-                    <th>Featured Image</th>
-                    <th>Name</th>
-                    <th>Count</th>
-                    <th><a class="btn btn-primary" href="{{ Route('album.create') }}">Add</a></th>
+                    <th>{{ __('generalBack.featuredImage') }}</th>
+                    <th>{{ __('generalBack.name') }}</th>
+                    <th>{{ __('generalBack.count') }}</th>
+                    <th><a class="btn btn-primary" href="{{ Route('album.create') }}">{{ __('generalBack.add') }}</a></th>
                 </tr>
             </thead>
 

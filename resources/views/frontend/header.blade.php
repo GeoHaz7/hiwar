@@ -79,9 +79,11 @@
                       </li>
 
                       @foreach ($pages as $page)
-                          <li>
-                              <a href="/front/page/{{ $page->page_slug }}">{{ $page->title }}</a>
-                          </li>
+                          @if ($page->sideMenu == 1)
+                              <li>
+                                  <a href="/front/page/{{ $page->page_slug }}">{{ $page->title }}</a>
+                              </li>
+                          @endif
                       @endforeach
                       <li>
                           <a href="{{ route('front.contact') }}">إتصل بنا</a>

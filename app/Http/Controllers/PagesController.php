@@ -53,6 +53,20 @@ class PagesController extends Controller
             // return $id;
         }
 
+        //slugg
+        $count = 1;
+        $slug = Str::slug($request->pageTitle);
+
+        while (Page::where('page_slug', '=', $slug)->exists()) {
+            $tempSlug = $slug . '-' . $count;
+            $count = $count + 1;
+
+            if (!Page::where('page_slug', '=', $tempSlug)->exists()) {
+                $slug = $tempSlug;
+                break;
+            }
+        }
+
         $page = Page::create([
             'title' => $request->pageTitle,
             'brief' => $request->pageBrief,
@@ -60,7 +74,7 @@ class PagesController extends Controller
             'status' => 1,
             'sideMenu' => 1,
             'feature_image' => $id,
-            'page_slug' => Str::slug($request->pageTitle),
+            'page_slug' => $slug,
         ]);
 
         if ($request->image_array) {
@@ -120,6 +134,20 @@ class PagesController extends Controller
                 app('App\Http\Controllers\ImagesController')->destroy($image->filename);
         }
 
+        //slugg
+        $count = 1;
+        $slug = Str::slug($request->pageTitle);
+
+        while (Page::where('page_slug', '=', $slug)->exists()) {
+            $tempSlug = $slug . '-' . $count;
+            $count = $count + 1;
+
+            if (!Page::where('page_slug', '=', $tempSlug)->exists()) {
+                $slug = $tempSlug;
+                break;
+            }
+        }
+
         $page->update([
             'title' => $request->pageTitle,
             'brief' => $request->pageBrief,
@@ -127,7 +155,7 @@ class PagesController extends Controller
             'status' => 1,
             'sideMenu' => 1,
             'feature_image' => $idd,
-            'page_slug' => Str::slug($request->pageTitle),
+            'page_slug' => $slug,
 
         ]);
 

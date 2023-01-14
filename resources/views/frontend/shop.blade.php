@@ -73,7 +73,18 @@
                     contentType: false,
                     success: function(response) {
                         if (response.message == "success") {
-                            $(".itemCount").html(response.totalItems);
+                            $.ajax({
+                                url: "{{ route('cart.totalItems') }}",
+                                type: "GET",
+                                processData: false,
+                                contentType: false,
+                                success: function(response) {
+                                    if (response.message == "success") {
+                                        $(".itemCount").html(response.totalItems);
+                                    }
+                                },
+                                error: function(err) {}
+                            });
                         }
                     },
                     error: function(err) {}

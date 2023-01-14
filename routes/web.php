@@ -76,9 +76,13 @@ Route::group(
 
         Route::get('/cart/list', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
         Route::get('/cart/my', [App\Http\Controllers\CartController::class, 'show'])->name('cart.show');
-        Route::get('/cart/add/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('cart.addTo');
+        Route::get('/cart/plus/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('cart.addTo');
+        Route::get('/cart/minus/{id}', [App\Http\Controllers\CartController::class, 'removeFromCart'])->name('cart.minus');
+        Route::get('/cart/delete/{id}', [App\Http\Controllers\CartController::class, 'deleteFromCart'])->name('cart.delete');
         Route::get('/cart/itemTotal', [App\Http\Controllers\CartController::class, 'getCartTotalItems'])->name('cart.totalItems');
+        Route::post('/cart/checkout', [App\Http\Controllers\CartController::class, 'checkout'])->name('cart.checkout');
 
+        Route::post('/order/store', [App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
 
         Route::get('/video/data', [App\Http\Controllers\VideoAlbumController::class, 'index'])->name('videoAlbum.data');
         Route::get('/video', [App\Http\Controllers\VideoAlbumController::class, 'show'])->name('videoAlbum.list');

@@ -42,16 +42,22 @@
     <meta property="twitter:image" content="assets/img/slider-img1.png">
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ URL('assets/img/favicon.ico') }}" type="image/x-icon">
 
     <link rel="stylesheet" href="{{ url('assets/css/bootstrap.rtl.min.css') }}" />
     <!-- <link rel="stylesheet" type="text/css" href="../../../public/assets/css/bootstrap.rtl.min.css"> -->
-    <link href="https://kit-pro.fontawesome.com/releases/v5.15.2/css/pro.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/styleFront.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/responsive.css') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet" />
 
     <!--End ALL STYLESHEET -->
 
@@ -79,6 +85,14 @@
     <script src="{{ url('assets/js/main.js') }}"></script>
 
     @yield('js')
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+        integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
 
     <script>
         var url = "{{ route('changeLangFront') }}";

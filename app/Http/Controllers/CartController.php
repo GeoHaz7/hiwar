@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderProduct;
 use stdClass;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -22,12 +23,10 @@ class CartController extends Controller
         $id = $request->id;
         $enter = false;
         if (!$request->cookie('cart')) {
-            $totalcarts = 0;
             $cart = [];
             array_push($cart, ['product_id' => $id, 'quantity' => 1]);
 
-            $totalcarts = count($cart);
-            return response()->json(['message' => 'success', 'totalItems' => $totalcarts])->cookie('cart', json_encode($cart), 60);
+            return response()->json(['message' => 'success'])->cookie('cart', json_encode($cart), 60);
         } else {
             $cart = json_decode($request->cookie('cart'));
 
@@ -38,15 +37,56 @@ class CartController extends Controller
                     $value['quantity'] = $value['quantity'] + 1;
                     $cart[$key] = $value;
 
-                    $totalcarts = count($cart);
-                    return response()->json(['message' => 'success', 'totalItems' => $totalcarts])->cookie('cart', json_encode($cart), 60);
+                    return response()->json(['message' => 'success'])->cookie('cart', json_encode($cart), 60);
                 }
             }
             if ($enter == false) {
                 array_push($cart, ['product_id' => $id, 'quantity' => 1]);
 
-                $totalcarts = count($cart);
-                return response()->json(['message' => 'success', 'totalItems' => $totalcarts])->cookie('cart', json_encode($cart), 60);
+                return response()->json(['message' => 'success'])->cookie('cart', json_encode($cart), 60);
+            }
+        }
+    }
+
+    public function removeFromCart(Request $request)
+    {
+        $id = $request->id;
+
+        $cart = json_decode($request->cookie('cart'));
+
+        foreach ($cart as $key => $value) {
+            $value = json_decode(json_encode($value), true);
+            if ($value['product_id'] == $id) {
+                $value['quantity'] = $value['quantity'] - 1;
+
+                if ($value['quantity'] < 1) {
+                    unset($cart[$key]);
+                    return response()->json(['message' => 'removed'])->cookie('cart', json_encode($cart), 60);
+                } else {
+                    $cart[$key] = $value;
+                    return response()->json(['message' => 'success'])->cookie('cart', json_encode($cart), 60);
+                }
+            }
+        }
+    }
+
+    public function deleteFromCart(Request $request)
+    {
+        $id = $request->id;
+
+        $cart = json_decode($request->cookie('cart'));
+
+        if (gettype($cart) == "object") {
+            $cart = (array)$cart;
+        }
+
+
+
+        foreach ($cart as $key => $value) {
+            $value = json_decode(json_encode($value), true);
+            if ($value['product_id'] == $id) {
+                unset($cart[$key]);
+                return response()->json(['message' => 'success'])->cookie('cart', json_encode($cart), 60);
             }
         }
     }
@@ -68,29 +108,48 @@ class CartController extends Controller
     {
         $cart = json_decode($request->cookie('cart'));
 
-        $products = [];
-        $total = 0;
+        if ($cart) {
+            $products = [];
+            $total = 0;
+
+            foreach ($cart as $key => $value) {
+                $loopProduct = Product::find($value->product_id);
+
+                $product = new stdClass();
+                $product->product_id = $value->product_id;
+                $product->name = $loopProduct->name;
+                $product->price = $loopProduct->price;
+                $product->description = $loopProduct->description;
+                $product->thumbnail = $loopProduct->thumbnail ? $loopProduct->thumbnail->filename : null;
+                $product->quantiy = $value->quantity;
+
+                array_push($products, $product);
+            }
+
+            foreach ($products as $key => $value) {
+                $productTotal = $value->quantiy * $value->price;
+                $total = $total + $productTotal;
+            }
+
+
+            return view('frontend.cartList', ['products' => $products, 'total' => $total]);
+        }
+    }
+
+    public function checkout(Request $request)
+    {
+
+
+        $cart = json_decode($request->cookie('cart'));
 
         foreach ($cart as $key => $value) {
-            $loopProduct = Product::find($value->product_id);
 
-            $product = new stdClass();
-            $product->product_id = $value->product_id;
-            $product->name = $loopProduct->name;
-            $product->price = $loopProduct->price;
-            $product->description = $loopProduct->description;
-            $product->thumbnail = $loopProduct->thumbnail->filename;
-            $product->quantiy = $value->quantity;
-
-            array_push($products, $product);
+            OrderProduct::create([
+                'order_id' => $request->order_id,
+                'product_id' => $value->product_id,
+                'quantity' => $value->quantity,
+            ]);
         }
-
-        foreach ($products as $key => $value) {
-            $productTotal = $value->quantiy * $value->price;
-            $total = $total + $productTotal;
-        }
-
-
-        return view('frontend.cartList', ['products' => $products, 'total' => $total]);
+        return response()->json(['message' => 'success']);
     }
 }
